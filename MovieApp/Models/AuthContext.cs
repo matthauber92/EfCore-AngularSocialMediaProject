@@ -26,26 +26,26 @@ namespace MovieApp.Models
             modelBuilder.Entity<Posts>()
                 .HasOne(u => u.User)
                 .WithMany(p => p.Posts)
-                .HasForeignKey(f => f.UserId)
-                .HasConstraintName("ForeignKey_UserId");
+                .HasForeignKey(f => f.UserId);
+            //.HasConstraintName("ForeignKey_UserId");
 
             modelBuilder.Entity<Comments>()
                 .HasOne(p => p.Post)
                 .WithMany(c => c.Comments)
-                .HasForeignKey(f => f.PostId)
-                .HasConstraintName("ForeignKey_PostsId");
+                .HasForeignKey(f => f.PostId);
+                //.HasConstraintName("ForeignKey_PostsId");
 
             modelBuilder.Entity<Movies>()
                 .HasOne(u => u.User)
                 .WithMany(m => m.Movies)
-                .HasForeignKey(f => f.UserId)
-                .HasConstraintName("ForeignKey_UserId");
+                .HasForeignKey(f => f.UserId);
+                //.HasConstraintName("ForeignKey_UserId");
 
             modelBuilder.Entity<Friends>()
                 .HasOne(c => c.User)
                 .WithMany(b => b.Friends)
-                .HasForeignKey(p => p.UserId)
-                .HasConstraintName("ForeignKey_UserId");
+                .HasForeignKey(p => p.UserId);
+                //.HasConstraintName("ForeignKey_UserId");
 
         }
     }
