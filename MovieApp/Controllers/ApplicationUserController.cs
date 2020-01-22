@@ -25,13 +25,14 @@ namespace MovieApp.Controllers
         [HttpPost]
         [Route("SignUp")]
         //POST: api/ApplicationUser/SignUp
-        public async Task<Object> PostApplicationUser(ApplicationUserModel model)
+        public async Task<Object> PostNewUser(ApplicationUserModel model)
         {
             var user = new ApplicationUser
             {
                 UserName = model.UserName,
                 Email = model.Email,
-                FullName = model.FullName
+                FirstName = model.FirstName,
+                LastName = model.LastName
             };
 
             try

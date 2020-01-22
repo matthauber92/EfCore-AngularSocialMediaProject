@@ -10,8 +10,8 @@ using MovieApp.Models;
 namespace MovieApp.Migrations
 {
     [DbContext(typeof(AuthContext))]
-    [Migration("20200122094152_InitialCommit")]
-    partial class InitialCommit
+    [Migration("20200122222343_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -283,7 +283,9 @@ namespace MovieApp.Migrations
 
                     b.Property<string>("DisplayName");
 
-                    b.Property<string>("FullName");
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
 
                     b.Property<string>("Picture");
 

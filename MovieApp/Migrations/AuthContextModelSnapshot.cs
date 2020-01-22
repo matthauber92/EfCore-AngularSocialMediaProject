@@ -281,7 +281,9 @@ namespace MovieApp.Migrations
 
                     b.Property<string>("DisplayName");
 
-                    b.Property<string>("FullName");
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
 
                     b.Property<string>("Picture");
 
