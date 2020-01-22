@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MovieApp.Models;
 
 namespace MovieApp.Controllers
 {
@@ -10,6 +11,11 @@ namespace MovieApp.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        public ValuesController(AuthContext context)
+        {
+
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()

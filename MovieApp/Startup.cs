@@ -9,6 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MovieApp.Models;
+using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace MovieApp
 {
@@ -25,15 +28,33 @@ namespace MovieApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info {Title = "Movie API", Description = "Swagger Core API" });
+            });
+
+            services.AddDbContextPool<AuthContext>( // replace "YourDbContext" with the class name of your DbContext
+                options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+
+            services.AddDefaultIdentity<ApplicationUser>()
+                .AddEntityFrameworkStores<AuthContext>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+            // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseAuthentication();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Core API");
+            });
 
             app.UseMvc();
         }
