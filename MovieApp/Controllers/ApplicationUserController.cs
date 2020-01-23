@@ -88,10 +88,15 @@ namespace MovieApp.Controllers
             var user = await _userManager.FindByIdAsync(userId);
             return new
             {
+                user.Id,
+                user.UserName,
+                user.DisplayName,
+                user.Bio,
+                user.Picture,
                 user.FirstName,
                 user.LastName,
                 user.Email,
-                user.UserName
+                user.CreatedOn
             };
         }
     }

@@ -46,23 +46,25 @@ namespace MovieApp
 
             services.AddCors();
 
+
+            //Jwt Authentication
             var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
-            services.AddAuthentication(x =>
+            services.AddAuthentication(x =>   //Start Authntication to send differen types of Auth
             {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; //Set tolken
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; 
                 x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x =>
+            }).AddJwtBearer(x => //Configure tolken
             {
                 x.RequireHttpsMetadata = false;
-                x.SaveToken = false;
-                x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                x.SaveToken = false; //Set false to not save tolken in server
+                x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters //Define tolken for user Auth
                 {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuerSigningKey = true, //system validate key
+                    IssuerSigningKey = new SymmetricSecurityKey(key), //Assign key for Jwt signature
                     ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ClockSkew = TimeSpan.Zero
+                    ValidateAudience = false, //Defines who generated tolken
+                    ClockSkew = TimeSpan.Zero //Set expiration time of tolken
                 };
             });
 
@@ -76,7 +78,7 @@ namespace MovieApp
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(builder =>
+            app.UseCors(builder => //Send tolken information to App Url
             builder.WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString())
             .AllowAnyHeader()
             .AllowAnyMethod());
