@@ -55,7 +55,7 @@ namespace MovieApp.Controllers
 
         [HttpPost]
         [Route("Login")]
-        public async Task<IActionResult> Login(Login model)
+        public async Task<IActionResult> Login(AppUser model)
         {
             var user = await _userManager.FindByNameAsync(model.UserName);
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
@@ -65,7 +65,7 @@ namespace MovieApp.Controllers
                 {
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                        new Claim("UserID",user.Id.ToString())
+                        new Claim("UserID", user.Id.ToString())
                     }),
                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
@@ -82,7 +82,7 @@ namespace MovieApp.Controllers
         [HttpGet]
         [Authorize]
         [Route("UserProfile")]
-        public async Task<Object> GetUserProfile()
+        public async Task<Object> GetUser()
         {
             string userId = User.Claims.First(c => c.Type == "UserID").Value;
             var user = await _userManager.FindByIdAsync(userId);
