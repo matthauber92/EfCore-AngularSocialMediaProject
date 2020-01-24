@@ -2,6 +2,7 @@ import { UserService } from '../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,7 @@ export class DashboardComponent implements OnInit {
   currentUser;
   push: boolean = false;
 
-  constructor(private router: Router, private service: UserService, private toastr: ToastrService) { }
+  constructor(private router: Router, private service: UserService, private toastr: ToastrService, private spinner: NgxSpinnerModule) { }
 
   ngOnInit() {
     const me = this;
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
         console.log(err);
       },
     );
+    this.openNav();
   }
 
 
@@ -36,12 +38,12 @@ export class DashboardComponent implements OnInit {
   }
 
   openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-    this.push = true;
-  }
-  
-  closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    this.push = false;
+    if (this.push == false) {
+      document.getElementById("mySidenav").style.width = "250px";
+      this.push = true;
+    } else {
+      document.getElementById("mySidenav").style.width = "0";
+      this.push = false;
+    }
   }
 }

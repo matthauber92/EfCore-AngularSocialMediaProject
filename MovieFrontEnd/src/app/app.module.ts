@@ -13,6 +13,7 @@ import { UserService } from './services/user.service';
 import { LoginComponent } from './user/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthInterceptor } from './shared/auth/auth.interceptor';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AuthInterceptor } from './shared/auth/auth.interceptor';
     ToastrModule.forRoot({
       progressBar: true
     }),
-    FormsModule
+    FormsModule,
+    NgxSpinnerModule
   ],
   providers: [UserService, {
     provide: HTTP_INTERCEPTORS,
