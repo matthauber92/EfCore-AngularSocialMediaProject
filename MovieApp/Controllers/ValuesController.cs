@@ -11,7 +11,7 @@ namespace MovieApp.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        public ValuesController(AuthContext context)
+        public ValuesController(APIContext context)
         {
 
         }

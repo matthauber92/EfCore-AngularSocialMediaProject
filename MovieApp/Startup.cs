@@ -15,6 +15,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity;
 
 namespace MovieApp
 {
@@ -41,7 +42,7 @@ namespace MovieApp
             services.AddDbContextPool<APIContext>( // replace "YourDbContext" with the class name of your DbContext
                 options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
-            services.AddDefaultIdentity<ApplicationUser>()
+            services.AddIdentity<ApplicationUser, IdentityRole<int>>()
                 .AddEntityFrameworkStores<APIContext>();
 
             services.AddCors(options =>

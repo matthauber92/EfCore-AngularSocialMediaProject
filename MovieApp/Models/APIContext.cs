@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace MovieApp.Models
 {
-    public class APIContext : IdentityDbContext
+    public class APIContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
     {
         public APIContext(DbContextOptions<APIContext> options) : base(options)
         {
