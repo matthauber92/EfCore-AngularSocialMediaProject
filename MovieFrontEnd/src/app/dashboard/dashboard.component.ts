@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit {
 
 
   onLogout() {
+    this.toastr.success('Succssfully Logged Out');
     localStorage.removeItem('token');
     this.router.navigate(['/user/login']);
   }
