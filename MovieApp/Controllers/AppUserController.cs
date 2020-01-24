@@ -12,18 +12,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MovieApp.Models;
+using MovieApp.Services;
 
 namespace MovieApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ApplicationUserController : ControllerBase
+    public class AppUserController : ControllerBase
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationSettings _appSettings;
-
-        public ApplicationUserController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IOptions<ApplicationSettings> appSettings)
+        private IAppUserService _appUserService;
+        public AppUserController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IOptions<ApplicationSettings> appSettings)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -94,10 +95,7 @@ namespace MovieApp.Controllers
                 user.DisplayName,
                 user.FirstName,
                 user.LastName,
-                user.Email,
-                user.Movies,
-                user.Posts,
-                user.Friends
+                user.Email
             };
         }
     }

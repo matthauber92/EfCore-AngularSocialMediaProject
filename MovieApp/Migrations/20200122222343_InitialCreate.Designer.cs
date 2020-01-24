@@ -9,7 +9,7 @@ using MovieApp.Models;
 
 namespace MovieApp.Migrations
 {
-    [DbContext(typeof(AuthContext))]
+    [DbContext(typeof(APIContext))]
     [Migration("20200122222343_InitialCreate")]
     partial class InitialCreate
     {

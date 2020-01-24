@@ -8,7 +8,7 @@ using MovieApp.Models;
 
 namespace MovieApp.Migrations
 {
-    [DbContext(typeof(AuthContext))]
+    [DbContext(typeof(APIContext))]
     partial class AuthContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

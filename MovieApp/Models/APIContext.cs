@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MovieApp.Models
 {
-    public class AuthContext : IdentityDbContext
+    public class APIContext : IdentityDbContext
     {
-        public AuthContext(DbContextOptions<AuthContext> options) : base(options)
+        public APIContext(DbContextOptions<APIContext> options) : base(options)
         {
 
         }

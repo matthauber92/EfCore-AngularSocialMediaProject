@@ -38,11 +38,11 @@ namespace MovieApp
                 c.SwaggerDoc("v1", new Info {Title = "Movie API", Description = "Swagger Core API" });
             });
 
-            services.AddDbContextPool<AuthContext>( // replace "YourDbContext" with the class name of your DbContext
+            services.AddDbContextPool<APIContext>( // replace "YourDbContext" with the class name of your DbContext
                 options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>()
-                .AddEntityFrameworkStores<AuthContext>();
+                .AddEntityFrameworkStores<APIContext>();
 
             services.AddCors(options =>
             {
