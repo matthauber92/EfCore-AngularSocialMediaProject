@@ -76,7 +76,7 @@ namespace MovieApp.Controllers
                 return Ok(new { token });
             }
             else
-                return BadRequest(new { message = "Username or password is incorrect." });
+                return new NotFoundResult();
         }
 
         [HttpGet]
@@ -86,17 +86,18 @@ namespace MovieApp.Controllers
         {
             string userId = User.Claims.First(c => c.Type == "UserID").Value;
             var user = await _userManager.FindByIdAsync(userId);
-            return new
+            return new 
             {
                 user.Id,
                 user.UserName,
-                user.DisplayName,
                 user.Bio,
-                user.Picture,
+                user.DisplayName,
                 user.FirstName,
                 user.LastName,
                 user.Email,
-                user.CreatedOn
+                user.Movies,
+                user.Posts,
+                user.Friends
             };
         }
     }

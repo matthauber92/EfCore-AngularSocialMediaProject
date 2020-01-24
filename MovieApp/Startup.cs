@@ -44,7 +44,15 @@ namespace MovieApp
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<AuthContext>();
 
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                  "CorsPolicy",
+                  builder => builder.WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString())
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials());
+            });
 
 
             //Jwt Authentication
@@ -78,10 +86,7 @@ namespace MovieApp
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(builder => //Send tolken information to App Url
-            builder.WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString())
-            .AllowAnyHeader()
-            .AllowAnyMethod());
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
 

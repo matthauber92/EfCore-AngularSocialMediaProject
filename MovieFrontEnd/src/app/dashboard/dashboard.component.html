@@ -1,0 +1,22 @@
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <b style="color:#FFFFFF;">TeST</b>
+</div>
+
+
+<div class="card-body card-padded bg-white-wash" [class]="push? 'sidenavA': 'sidenavB'"> 
+  <nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand text-white">Movie App</a>
+    <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
+  </nav>
+  
+  <div class="card m-5" style="width:18rem" *ngIf="currentUser">
+    <ul class="list-group">
+      <li class="list-group-item"><strong>Username : </strong>{{currentUser.userName}}</li>
+      <li class="list-group-item"><strong>FullName : </strong>{{currentUser.firstName + ' ' + currentUser.lastName}}</li>
+      <li class="list-group-item"><strong>Email : </strong>{{currentUser.email}}</li>
+    </ul>
+    
+  <span style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776; open</span>
+  </div>
+</div>
