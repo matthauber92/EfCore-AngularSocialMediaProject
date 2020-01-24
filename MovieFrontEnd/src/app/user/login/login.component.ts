@@ -1,5 +1,5 @@
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from './../../shared/user.service';
+import { UserService } from '../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/dashboard');
       },
       err => {
-          this.toastr.error('Incorrect username or password.', 'Authentication failed.');
+          this.toastr.error('Incorrect username or password.', 'Login failed');
         
       }
     );

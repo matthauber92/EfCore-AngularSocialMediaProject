@@ -9,10 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { RegistrationComponent } from './user/registration/registration.component';
-import { UserService } from './shared/user.service';
+import { UserService } from './services/user.service';
 import { LoginComponent } from './user/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthInterceptor } from './auth/auth.interceptor';
+import { AuthInterceptor } from './shared/auth/auth.interceptor';
 
 @NgModule({
   declarations: [
