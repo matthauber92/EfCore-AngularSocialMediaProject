@@ -1,0 +1,438 @@
+/* ---------------------- */
+/* Custom SCSS Controller */
+/* ---------------------- */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800|Roboto:300,400,400i,500,600,700,800");
+/* These are additional overrides from _variables.scss */
+/*!
+ * Bootstrap v4.2.1 (https://getbootstrap.com/)
+ * Copyright 2011-2018 The Bootstrap Authors
+ * Copyright 2011-2018 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+/* Navigation */
+/*----- BEGIN the each loop to assign an unique color to each link in the side nav -----*/
+.sub-nav {
+  /*----- END the each loop to assign an unique color to each link in the side nav -----*/ }
+  .sub-nav .nav-primary {
+    background: #fff;
+    border-radius: 0;
+    border-left: none;
+    border-right: 1px solid #caced1;
+    
+    cursor: pointer;
+    height: 100%;
+    min-height: 55px;
+    position: relative;
+    -webkit-transition: all 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out; }
+    .sub-nav .nav-primary .nav-icon {
+      width: 35px; }
+    .sub-nav .nav-primary .nav-icon-bg {
+      width: 35px;
+      height: 35px;
+      background: #50aed8;
+      border-radius: 50%;
+      text-align: center;
+      -webkit-transition: background 0.25s ease-in-out;
+      transition: background 0.25s ease-in-out; }
+      .sub-nav .nav-primary .nav-icon-bg i {
+        color: #fff;
+        font-size: 1.15rem;
+        padding-top: 8px; }
+    .sub-nav .nav-primary span {
+      color: #50aed8;
+      font-family: Montserrat;
+      font-size: .9rem;
+      font-weight: 400;
+      -webkit-transition: all 0.25s ease-in-out;
+      transition: all 0.25s ease-in-out; }
+    .sub-nav .nav-primary:before {
+      content: "";
+      background: #a3d5eb;
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      bottom: 0px;
+      right: 0;
+      -webkit-transform: scaleX(0);
+              transform: scaleX(0);
+      -webkit-transition: all 0.25s ease-in-out;
+      transition: all 0.25s ease-in-out; }
+    .sub-nav .nav-primary:hover {
+      background: #50aed8; }
+      .sub-nav .nav-primary:hover:before {
+        -webkit-transform: scaleX(1);
+                transform: scaleX(1); }
+      .sub-nav .nav-primary:hover .nav-icon-bg {
+        background: #fff; }
+        .sub-nav .nav-primary:hover .nav-icon-bg i {
+          color: #50aed8; }
+      .sub-nav .nav-primary:hover span {
+        color: #fff; }
+    .sub-nav .nav-primary.active {
+      background: #50aed8;
+      color: #fff; }
+      .sub-nav .nav-primary.active:before {
+        -webkit-transform: scaleX(1);
+                transform: scaleX(1); }
+      .sub-nav .nav-primary.active .nav-icon-bg {
+        background: #fff; }
+        .sub-nav .nav-primary.active .nav-icon-bg i {
+          color: #50aed8; }
+      .sub-nav .nav-primary.active span {
+        color: #fff; }
+      .sub-nav .nav-primary.active:hover {
+        color: #fff; }
+  .sub-nav .nav-green {
+    background: #fff;
+    border-radius: 0;
+    border-left: none;
+    border-right: 1px solid #caced1;
+    
+    cursor: pointer;
+    height: 100%;
+    min-height: 55px;
+    position: relative;
+    -webkit-transition: all 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out; }
+    .sub-nav .nav-green .nav-icon {
+      width: 35px; }
+    .sub-nav .nav-green .nav-icon-bg {
+      width: 35px;
+      height: 35px;
+      background: #69d193;
+      border-radius: 50%;
+      text-align: center;
+      -webkit-transition: background 0.25s ease-in-out;
+      transition: background 0.25s ease-in-out; }
+      .sub-nav .nav-green .nav-icon-bg i {
+        color: #fff;
+        font-size: 1.15rem;
+        padding-top: 8px; }
+    .sub-nav .nav-green span {
+      color: #69d193;
+      font-family: Montserrat;
+      font-size: .9rem;
+      font-weight: 400;
+      -webkit-transition: all 0.25s ease-in-out;
+      transition: all 0.25s ease-in-out; }
+    .sub-nav .nav-green:before {
+      content: "";
+      background: #b7e9cb;
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      bottom: 0px;
+      right: 0;
+      -webkit-transform: scaleX(0);
+              transform: scaleX(0);
+      -webkit-transition: all 0.25s ease-in-out;
+      transition: all 0.25s ease-in-out; }
+    .sub-nav .nav-green:hover {
+      background: #69d193; }
+      .sub-nav .nav-green:hover:before {
+        -webkit-transform: scaleX(1);
+                transform: scaleX(1); }
+      .sub-nav .nav-green:hover .nav-icon-bg {
+        background: #fff; }
+        .sub-nav .nav-green:hover .nav-icon-bg i {
+          color: #69d193; }
+      .sub-nav .nav-green:hover span {
+        color: #fff; }
+    .sub-nav .nav-green.active {
+      background: #69d193;
+      color: #fff; }
+      .sub-nav .nav-green.active:before {
+        -webkit-transform: scaleX(1);
+                transform: scaleX(1); }
+      .sub-nav .nav-green.active .nav-icon-bg {
+        background: #fff; }
+        .sub-nav .nav-green.active .nav-icon-bg i {
+          color: #69d193; }
+      .sub-nav .nav-green.active span {
+        color: #fff; }
+      .sub-nav .nav-green.active:hover {
+        color: #fff; }
+  .sub-nav .nav-orange {
+    background: #fff;
+    border-radius: 0;
+    border-left: none;
+    border-right: 1px solid #caced1;
+    
+    cursor: pointer;
+    height: 100%;
+    min-height: 55px;
+    position: relative;
+    -webkit-transition: all 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out; }
+    .sub-nav .nav-orange .nav-icon {
+      width: 35px; }
+    .sub-nav .nav-orange .nav-icon-bg {
+      width: 35px;
+      height: 35px;
+      background: #fc8a35;
+      border-radius: 50%;
+      text-align: center;
+      -webkit-transition: background 0.25s ease-in-out;
+      transition: background 0.25s ease-in-out; }
+      .sub-nav .nav-orange .nav-icon-bg i {
+        color: #fff;
+        font-size: 1.15rem;
+        padding-top: 8px; }
+    .sub-nav .nav-orange span {
+      color: #fc8a35;
+      font-family: Montserrat;
+      font-size: .9rem;
+      font-weight: 400;
+      -webkit-transition: all 0.25s ease-in-out;
+      transition: all 0.25s ease-in-out; }
+    .sub-nav .nav-orange:before {
+      content: "";
+      background: #fdc49a;
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      bottom: 0px;
+      right: 0;
+      -webkit-transform: scaleX(0);
+              transform: scaleX(0);
+      -webkit-transition: all 0.25s ease-in-out;
+      transition: all 0.25s ease-in-out; }
+    .sub-nav .nav-orange:hover {
+      background: #fc8a35; }
+      .sub-nav .nav-orange:hover:before {
+        -webkit-transform: scaleX(1);
+                transform: scaleX(1); }
+      .sub-nav .nav-orange:hover .nav-icon-bg {
+        background: #fff; }
+        .sub-nav .nav-orange:hover .nav-icon-bg i {
+          color: #fc8a35; }
+      .sub-nav .nav-orange:hover span {
+        color: #fff; }
+    .sub-nav .nav-orange.active {
+      background: #fc8a35;
+      color: #fff; }
+      .sub-nav .nav-orange.active:before {
+        -webkit-transform: scaleX(1);
+                transform: scaleX(1); }
+      .sub-nav .nav-orange.active .nav-icon-bg {
+        background: #fff; }
+        .sub-nav .nav-orange.active .nav-icon-bg i {
+          color: #fc8a35; }
+      .sub-nav .nav-orange.active span {
+        color: #fff; }
+      .sub-nav .nav-orange.active:hover {
+        color: #fff; }
+  .sub-nav .nav-purple {
+    background: #fff;
+    border-radius: 0;
+    border-left: none;
+    border-right: 1px solid #caced1;
+    
+    cursor: pointer;
+    height: 100%;
+    min-height: 55px;
+    position: relative;
+    -webkit-transition: all 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out; }
+    .sub-nav .nav-purple .nav-icon {
+      width: 35px; }
+    .sub-nav .nav-purple .nav-icon-bg {
+      width: 35px;
+      height: 35px;
+      background: #896be0;
+      border-radius: 50%;
+      text-align: center;
+      -webkit-transition: background 0.25s ease-in-out;
+      transition: background 0.25s ease-in-out; }
+      .sub-nav .nav-purple .nav-icon-bg i {
+        color: #fff;
+        font-size: 1.15rem;
+        padding-top: 8px; }
+    .sub-nav .nav-purple span {
+      color: #896be0;
+      font-family: Montserrat;
+      font-size: .9rem;
+      font-weight: 400;
+      -webkit-transition: all 0.25s ease-in-out;
+      transition: all 0.25s ease-in-out; }
+    .sub-nav .nav-purple:before {
+      content: "";
+      background: #ccbff1;
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      bottom: 0px;
+      right: 0;
+      -webkit-transform: scaleX(0);
+              transform: scaleX(0);
+      -webkit-transition: all 0.25s ease-in-out;
+      transition: all 0.25s ease-in-out; }
+    .sub-nav .nav-purple:hover {
+      background: #896be0; }
+      .sub-nav .nav-purple:hover:before {
+        -webkit-transform: scaleX(1);
+                transform: scaleX(1); }
+      .sub-nav .nav-purple:hover .nav-icon-bg {
+        background: #fff; }
+        .sub-nav .nav-purple:hover .nav-icon-bg i {
+          color: #896be0; }
+      .sub-nav .nav-purple:hover span {
+        color: #fff; }
+    .sub-nav .nav-purple.active {
+      background: #896be0;
+      color: #fff; }
+      .sub-nav .nav-purple.active:before {
+        -webkit-transform: scaleX(1);
+                transform: scaleX(1); }
+      .sub-nav .nav-purple.active .nav-icon-bg {
+        background: #fff; }
+        .sub-nav .nav-purple.active .nav-icon-bg i {
+          color: #896be0; }
+      .sub-nav .nav-purple.active span {
+        color: #fff; }
+      .sub-nav .nav-purple.active:hover {
+        color: #fff; }
+  .sub-nav .nav-secondary {
+    background: #fff;
+    border-radius: 0;
+    border-left: none;
+    border-right: 1px solid #caced1;
+    
+    cursor: pointer;
+    height: 100%;
+    min-height: 55px;
+    position: relative;
+    -webkit-transition: all 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out; }
+    .sub-nav .nav-secondary .nav-icon {
+      width: 35px; }
+    .sub-nav .nav-secondary .nav-icon-bg {
+      width: 35px;
+      height: 35px;
+      background: #3a4f6e;
+      border-radius: 50%;
+      text-align: center;
+      -webkit-transition: background 0.25s ease-in-out;
+      transition: background 0.25s ease-in-out; }
+      .sub-nav .nav-secondary .nav-icon-bg i {
+        color: #fff;
+        font-size: 1.15rem;
+        padding-top: 8px; }
+    .sub-nav .nav-secondary span {
+      color: #3a4f6e;
+      font-family: Montserrat;
+      font-size: .9rem;
+      font-weight: 400;
+      -webkit-transition: all 0.25s ease-in-out;
+      transition: all 0.25s ease-in-out; }
+    .sub-nav .nav-secondary:before {
+      content: "";
+      background: #6280ac;
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      bottom: 0px;
+      right: 0;
+      -webkit-transform: scaleX(0);
+              transform: scaleX(0);
+      -webkit-transition: all 0.25s ease-in-out;
+      transition: all 0.25s ease-in-out; }
+    .sub-nav .nav-secondary:hover {
+      background: #3a4f6e; }
+      .sub-nav .nav-secondary:hover:before {
+        -webkit-transform: scaleX(1);
+                transform: scaleX(1); }
+      .sub-nav .nav-secondary:hover .nav-icon-bg {
+        background: #fff; }
+        .sub-nav .nav-secondary:hover .nav-icon-bg i {
+          color: #3a4f6e; }
+      .sub-nav .nav-secondary:hover span {
+        color: #fff; }
+    .sub-nav .nav-secondary.active {
+      background: #3a4f6e;
+      color: #fff; }
+      .sub-nav .nav-secondary.active:before {
+        -webkit-transform: scaleX(1);
+                transform: scaleX(1); }
+      .sub-nav .nav-secondary.active .nav-icon-bg {
+        background: #fff; }
+        .sub-nav .nav-secondary.active .nav-icon-bg i {
+          color: #3a4f6e; }
+      .sub-nav .nav-secondary.active span {
+        color: #fff; }
+      .sub-nav .nav-secondary.active:hover {
+        color: #fff; }
+  .sub-nav .nav-info {
+    background: #fff;
+    border-radius: 0;
+    border-left: none;
+    border-right: 1px solid #caced1;
+    
+    cursor: pointer;
+    height: 100%;
+    min-height: 55px;
+    position: relative;
+    -webkit-transition: all 0.35s ease-in-out;
+    transition: all 0.35s ease-in-out; }
+    .sub-nav .nav-info .nav-icon {
+      width: 35px; }
+    .sub-nav .nav-info .nav-icon-bg {
+      width: 35px;
+      height: 35px;
+      background: #17a2b8;
+      border-radius: 50%;
+      text-align: center;
+      -webkit-transition: background 0.25s ease-in-out;
+      transition: background 0.25s ease-in-out; }
+      .sub-nav .nav-info .nav-icon-bg i {
+        color: #fff;
+        font-size: 1.15rem;
+        padding-top: 8px; }
+    .sub-nav .nav-info span {
+      color: #17a2b8;
+      font-family: Montserrat;
+      font-size: .9rem;
+      font-weight: 400;
+      -webkit-transition: all 0.25s ease-in-out;
+      transition: all 0.25s ease-in-out; }
+    .sub-nav .nav-info:before {
+      content: "";
+      background: #4cd3e9;
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      bottom: 0px;
+      right: 0;
+      -webkit-transform: scaleX(0);
+              transform: scaleX(0);
+      -webkit-transition: all 0.25s ease-in-out;
+      transition: all 0.25s ease-in-out; }
+    .sub-nav .nav-info:hover {
+      background: #17a2b8; }
+      .sub-nav .nav-info:hover:before {
+        -webkit-transform: scaleX(1);
+                transform: scaleX(1); }
+      .sub-nav .nav-info:hover .nav-icon-bg {
+        background: #fff; }
+        .sub-nav .nav-info:hover .nav-icon-bg i {
+          color: #17a2b8; }
+      .sub-nav .nav-info:hover span {
+        color: #fff; }
+    .sub-nav .nav-info.active {
+      background: #17a2b8;
+      color: #fff; }
+      .sub-nav .nav-info.active:before {
+        -webkit-transform: scaleX(1);
+                transform: scaleX(1); }
+      .sub-nav .nav-info.active .nav-icon-bg {
+        background: #fff; }
+        .sub-nav .nav-info.active .nav-icon-bg i {
+          color: #17a2b8; }
+      .sub-nav .nav-info.active span {
+        color: #fff; }
+      .sub-nav .nav-info.active:hover {
+        color: #fff; }
+  .sub-nav .nav-item:last-of-type .nav-link {
+    border-right: none; }

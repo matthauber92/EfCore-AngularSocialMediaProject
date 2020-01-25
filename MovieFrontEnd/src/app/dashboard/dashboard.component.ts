@@ -28,7 +28,6 @@ export class DashboardComponent implements OnInit {
         console.log(err);
       },
     );
-    this.openNav();
   }
 
 
@@ -36,15 +35,5 @@ export class DashboardComponent implements OnInit {
     this.toastr.success('Succssfully Logged Out');
     localStorage.removeItem('token');
     this.router.navigate(['/user/login']);
-  }
-
-  openNav() {
-    if (this.push == false) {
-      document.getElementById("mySidenav").style.width = "250px";
-      this.push = true;
-    } else {
-      document.getElementById("mySidenav").style.width = "0";
-      this.push = false;
-    }
   }
 }

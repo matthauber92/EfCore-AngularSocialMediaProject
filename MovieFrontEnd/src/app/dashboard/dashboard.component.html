@@ -1,22 +1,90 @@
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" (click)="openNav()">&times;</a>
-  <b style="color:#FFFFFF;">TeST</b>
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand text-white">Movie App</a>
+  <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
+</nav>
+<div class="row">
+  <div class="col-12 px-0">
+      <div id="library-nav" class="sub-nav">
+          <ul class="nav nav-tabs nav-justified">
+              <li class="nav-item">
+                  <a href="#alerts" class="nav-link nav-primary active">
+                          <div class="nav-icon float-left">
+                              <div class="nav-icon-bg d-block"></div>
+                          </div>
+                          <div class="nav-title pl-1 text-right">
+                              <span>My Profile</span>
+                          </div>
+       
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="#buttons" class="nav-link nav-green">
+              
+                          <div class="nav-icon float-left">
+                              <div class="nav-icon-bg d-block"></div>
+                          </div>
+                          <div class="nav-title pl-1 text-right">
+                              <span>Movies</span>
+                          </div>
+ 
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="#cards" class="nav-link nav-orange">
+        
+                          <div class="nav-icon float-left">
+                              <div class="nav-icon-bg d-block"></div>
+                          </div>
+                          <div class="nav-title pl-1 text-right">
+                              <span>Tv Shows</span>
+                          </div>
+               
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="#panels" class="nav-link nav-purple">
+            
+                          <div class="nav-icon float-left">
+                              <div class="nav-icon-bg d-block"></div>
+                          </div>
+                          <div class="nav-title pl-1 text-right">
+                              <span>Memes</span>
+                          </div>
+           
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="#generalUI" class="nav-link nav-secondary">
+                          <div class="nav-icon float-left">
+                              <div class="nav-icon-bg d-block"></div>
+                          </div>
+                          <div class="nav-title pl-1 text-right">
+                              <span>General UI</span>
+                          </div>
+
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="#" class="nav-link nav-info">
+                      <div class="nav-icon float-left">
+                          <div class="nav-icon-bg d-block"></div>
+                      </div>
+                      <div class="nav-title pl-1 text-right">
+                          <span>This is a very long title</span>
+                      </div>
+                  </a>
+              </li>
+          </ul>
+      </div>
+  </div>
 </div>
-
-
 <div class="card-body card-padded bg-white-wash" [class]="push? 'sidenavA': 'sidenavB'"> 
-  <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand text-white">Movie App</a>
-    <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
-  </nav>
-  
+
   <div class="card m-5" style="width:18rem" *ngIf="currentUser">
     <ul class="list-group">
       <li class="list-group-item"><strong>Username : </strong>{{currentUser.userName}}</li>
       <li class="list-group-item"><strong>FullName : </strong>{{currentUser.firstName + ' ' + currentUser.lastName}}</li>
       <li class="list-group-item"><strong>Email : </strong>{{currentUser.email}}</li>
     </ul>
-    
-  <span style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776; open</span>
   </div>
 </div>

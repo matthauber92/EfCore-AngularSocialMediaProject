@@ -18,19 +18,18 @@ namespace MovieApp.Services
         }
 
         //Return List of User Posts
-        //public Result<List<Posts>> ListUserPosts(int userId)
-        //{
-        //    Result<List<Posts>> result = new Result<List<Posts>>();
-        //    try
-        //    {
-        //        //result.Value = _db.Posts.Include(co => co.Comments).ToList();
-        //        result.Value = _db.Posts.Where(x => x.UserId == userId.ToString()).Include(co => co.Comments).OrderByDescending(o => o.PostId).ToList();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        result.Exception = ex;
-        //    }
-        //    return result;
-        //}
+        public Result<List<Posts>> ListUserPosts(int userId)
+        {
+            Result<List<Posts>> result = new Result<List<Posts>>();
+            try
+            {
+                result.Value = _db.Posts.Where(x => x.UserId == userId).Include(co => co.Comments).OrderByDescending(o => o.PostId).ToList();
+            }
+            catch (Exception ex)
+            {
+                result.Exception = ex;
+            }
+            return result;
+        }
     }
 }
