@@ -12,6 +12,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 export class DashboardComponent implements OnInit {
 
   currentUser;
+  id: number = 1;
   push: boolean = false;
 
   constructor(private router: Router, private service: UserService, private toastr: ToastrService, private spinner: NgxSpinnerModule) { }
@@ -28,6 +29,9 @@ export class DashboardComponent implements OnInit {
         console.log(err);
       },
     );
+    this.service.getPosts(this.id).subscribe(data => {
+      console.log(data);
+    })
   }
 
 

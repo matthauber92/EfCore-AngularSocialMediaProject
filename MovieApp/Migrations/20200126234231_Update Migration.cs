@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MovieApp.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class UpdateMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

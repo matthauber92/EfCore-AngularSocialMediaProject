@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace MovieApp.Services
 {
-    public class AppUserService : BaseService
+    public class AppUserService : BaseService, IAppUserService
     {
         private UserManager<ApplicationUser> _userManager;
         public AppUserService(APIContext db, UserManager<ApplicationUser> _userManager) : base(db)

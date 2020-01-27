@@ -7,8 +7,8 @@ using MovieApp.Helpers;
 
 namespace MovieApp.Services
 {
-    interface IAppUserService
+    public interface IAppUserService
     {
-        Result<Posts> ListUserPosts(int userId);
+        Result<List<Posts>> ListUserPosts(int userId);
     }
 }

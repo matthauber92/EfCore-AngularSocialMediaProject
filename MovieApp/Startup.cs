@@ -49,7 +49,7 @@ namespace MovieApp
             {
                 options.AddPolicy(
                   "CorsPolicy",
-                  builder => builder.WithOrigins(Configuration["ApplicationSettings:Client_URL"].ToString())
+                  builder => builder.AllowAnyOrigin()
                   .AllowAnyMethod()
                   .AllowAnyHeader()
                   .AllowCredentials());

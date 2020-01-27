@@ -53,4 +53,8 @@ export class UserService {
   getUserProfile() {
     return this.http.get(this.apiUrl + '/AppUser/UserProfile');
   }
+
+  getPosts(userID: number) {
+    return this.http.get(this.apiUrl + '/AppUser/Dash');
+  }
 }

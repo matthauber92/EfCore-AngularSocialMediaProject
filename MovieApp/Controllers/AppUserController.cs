@@ -13,22 +13,24 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MovieApp.Models;
 using MovieApp.Services;
+using MovieApp.Helpers;
 
 namespace MovieApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AppUserController : ControllerBase
+    public class AppUserController : BaseController<AppUserController, IAppUserService>
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
+        private static IAppUserService service;
         private readonly ApplicationSettings _appSettings;
-        private IAppUserService _appUserService;
-        public AppUserController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IOptions<ApplicationSettings> appSettings)
+
+        public AppUserController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationSettings appSettings):base(service)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _appSettings = appSettings.Value;
+            _appSettings = appSettings;
         }
 
         [HttpPost]
@@ -97,6 +99,22 @@ namespace MovieApp.Controllers
                 user.LastName,
                 user.Email
             };
+        }
+
+        [HttpGet]
+        [Route("Dash")]
+        public ActionResult<List<Posts>> GetPosts([FromQuery] int userId)
+        {
+            var result = _service.ListUserPosts(userId);
+
+            if(result.HasValue)
+            {
+                return result.Value;
+            }
+            else
+            {
+                return ErrorResult(result.Exception.Message);
+            }
         }
     }
 }
