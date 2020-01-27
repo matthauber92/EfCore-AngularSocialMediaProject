@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Identity;
+using MovieApp.Services;
 
 namespace MovieApp
 {
@@ -44,6 +45,9 @@ namespace MovieApp
 
             services.AddIdentity<ApplicationUser, IdentityRole<int>>()
                 .AddEntityFrameworkStores<APIContext>();
+
+            services.AddScoped<BaseService>();
+            services.AddScoped<IAppUserService, AppUserService>();
 
             services.AddCors(options =>
             {

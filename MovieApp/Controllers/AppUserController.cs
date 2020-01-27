@@ -23,14 +23,13 @@ namespace MovieApp.Controllers
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
-        private static IAppUserService service;
         private readonly ApplicationSettings _appSettings;
 
-        public AppUserController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationSettings appSettings):base(service)
+        public AppUserController(IAppUserService service, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IOptions<ApplicationSettings> appSettings) :base(service)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _appSettings = appSettings;
+            _appSettings = appSettings.Value;
         }
 
         [HttpPost]

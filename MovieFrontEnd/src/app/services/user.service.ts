@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from 'rxjs';
+import { AppUser, Posts, Comments } from '../../models';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -54,7 +56,7 @@ export class UserService {
     return this.http.get(this.apiUrl + '/AppUser/UserProfile');
   }
 
-  getPosts(userID: number) {
-    return this.http.get(this.apiUrl + '/AppUser/Dash');
+  getPosts(userID: number): Observable<Posts[]> {
+    return this.http.get<Posts[]>(this.apiUrl + '/AppUser/Dash?userId=' + userID);
   }
 }
