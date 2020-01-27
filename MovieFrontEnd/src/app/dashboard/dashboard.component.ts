@@ -1,4 +1,5 @@
 import { UserService } from '../services/user.service';
+import { DashboardService } from '../services/dashboard.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -15,11 +16,11 @@ export class DashboardComponent implements OnInit {
   id: number = 1;
   push: boolean = false;
 
-  constructor(private router: Router, private service: UserService, private toastr: ToastrService, private spinner: NgxSpinnerModule) { }
+  constructor(private router: Router, private userService: UserService, private dashboardService: DashboardService, private toastr: ToastrService, private spinner: NgxSpinnerModule) { }
 
   ngOnInit() {
     const me = this;
-    this.service.getUserProfile().subscribe(
+    this.userService.getUserProfile().subscribe(
       res => {
         me.currentUser = res;
         me.toastr.success('Welcome, ' + this.currentUser.userName);
@@ -29,9 +30,13 @@ export class DashboardComponent implements OnInit {
         console.log(err);
       },
     );
-    this.service.getPosts(this.id).subscribe(data => {
+    this.dashboardService.getPosts(this.id).subscribe(data => {
       console.log(data);
-    })
+    },
+    err => {
+      console.log(err);
+    },
+    );
   }
 
 
