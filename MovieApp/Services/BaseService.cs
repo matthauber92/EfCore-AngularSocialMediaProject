@@ -12,10 +12,9 @@ namespace MovieApp.Services
         public APIContext _db;
         public IHttpContextAccessor _context;
 
-        protected BaseService(APIContext db)//, IHttpContextAccessor context)
+        protected BaseService(APIContext db)
         {
             _db = db;
-            //_context = context;
         }
     }
 }

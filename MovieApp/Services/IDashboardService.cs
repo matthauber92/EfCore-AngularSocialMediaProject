@@ -7,7 +7,7 @@ using MovieApp.Helpers;
 
 namespace MovieApp.Services
 {
-    public interface IAppUserService
+    public interface IDashboardService
     {
         Result<List<Posts>> ListUserPosts(int userId);
     }

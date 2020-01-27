@@ -47,7 +47,7 @@ namespace MovieApp
                 .AddEntityFrameworkStores<APIContext>();
 
             services.AddScoped<BaseService>();
-            services.AddScoped<IAppUserService, AppUserService>();
+            services.AddScoped<IDashboardService, DashboardService>();
 
             services.AddCors(options =>
             {

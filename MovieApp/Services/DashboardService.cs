@@ -10,9 +10,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace MovieApp.Services
 {
-    public class AppUserService : BaseService, IAppUserService
+    public class DashboardService : BaseService, IDashboardService
     {
-        public AppUserService(APIContext db, UserManager<ApplicationUser> _userManager) : base(db)
+        public DashboardService(APIContext db) : base(db)
         {
         }
 

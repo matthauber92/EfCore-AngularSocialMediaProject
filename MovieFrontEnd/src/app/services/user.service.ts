@@ -57,6 +57,6 @@ export class UserService {
   }
 
   getPosts(userID: number): Observable<Posts[]> {
-    return this.http.get<Posts[]>(this.apiUrl + '/AppUser/Dash?userId=' + userID);
+    return this.http.get<Posts[]>(this.apiUrl + '/AppUser/GetPosts?userId=' + userID);
   }
 }

@@ -19,13 +19,13 @@ namespace MovieApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AppUserController : BaseController<AppUserController, IAppUserService>
+    public class AppUserController : ControllerBase
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationSettings _appSettings;
 
-        public AppUserController(IAppUserService service, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IOptions<ApplicationSettings> appSettings) :base(service)
+        public AppUserController(IDashboardService service, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IOptions<ApplicationSettings> appSettings)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -98,22 +98,6 @@ namespace MovieApp.Controllers
                 user.LastName,
                 user.Email
             };
-        }
-
-        [HttpGet]
-        [Route("Dash")]
-        public ActionResult<List<Posts>> GetPosts([FromQuery] int userId)
-        {
-            var result = _service.ListUserPosts(userId);
-
-            if(result.HasValue)
-            {
-                return result.Value;
-            }
-            else
-            {
-                return ErrorResult(result.Exception.Message);
-            }
         }
     }
 }
