@@ -88,3 +88,9 @@
     </ul>
   </div>
 </div>
+
+<div *ngIf="currentUser">
+  <app-profile [currentUser]="currentUser">
+
+  </app-profile>
+</div>
