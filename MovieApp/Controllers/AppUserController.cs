@@ -83,7 +83,7 @@ namespace MovieApp.Controllers
 
         [HttpGet]
         [Authorize]
-        [Route("UserProfile")]
+        [Route("GetUser")]
         public async Task<Object> GetUser()
         {
             string userId = User.Claims.First(c => c.Type == "UserID").Value;

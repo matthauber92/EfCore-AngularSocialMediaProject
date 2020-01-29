@@ -1,4 +1,6 @@
 export class AppUser {
+    Id?: number;
+    UserName?: string;
     FirstName?: string;
     LastName?: string;
     DisplayName?: string;

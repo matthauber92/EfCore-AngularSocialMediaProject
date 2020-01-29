@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { AppUser, Posts, Comments } from '../../models';
 import { environment } from '../../environments/environment';
+import { shareReplay, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,28 @@ export class UserService {
 
   constructor(private fb: FormBuilder, private http: HttpClient) { }
   readonly apiUrl = environment.apiUrl;
+  private currentUser$: Observable<AppUser>;
+  private cachedUser: AppUser;
+
+    get currentUser() {
+      if (!this.currentUser$) {
+        this.currentUser$ = this.loadCurrentUser().pipe(
+          shareReplay(1)
+        );
+      }
+
+      return this.currentUser$;
+    }
+
+    private loadCurrentUser() {
+      const me = this;
+      return this.http.get<AppUser>(this.apiUrl + '/AppUser/GetUser').pipe(
+        map(response => {
+          me.cachedUser = response;
+          return response;
+        } )
+      );
+    }
 
   formModel = this.fb.group({
     UserName: ['', Validators.required],
@@ -50,9 +73,5 @@ export class UserService {
 
   login(formData) {
     return this.http.post(this.apiUrl + '/AppUser/Login', formData);
-  }
-
-  getUserProfile() {
-    return this.http.get(this.apiUrl + '/AppUser/UserProfile');
   }
 }

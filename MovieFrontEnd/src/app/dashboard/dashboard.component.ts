@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { AppUser } from 'src/models';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,33 +13,22 @@ import { NgxSpinnerModule } from "ngx-spinner";
 })
 export class DashboardComponent implements OnInit {
 
-  currentUser;
-  id: number = 1;
+  currentUser: AppUser;
   push: boolean = false;
 
   constructor(private router: Router, private userService: UserService, private dashboardService: DashboardService, private toastr: ToastrService, private spinner: NgxSpinnerModule) { }
 
   ngOnInit() {
     const me = this;
-    this.userService.getUserProfile().subscribe(
-      res => {
-        me.currentUser = res;
-        me.toastr.success('Welcome, ' + this.currentUser.userName);
-        console.log(this.currentUser);
-      },
+    this.userService.currentUser.subscribe(result => {
+      me.currentUser = result;
+      console.log(me.currentUser)
+    },
       err => {
         console.log(err);
       },
     );
-    this.dashboardService.getPosts(this.id).subscribe(data => {
-      console.log(data);
-    },
-    err => {
-      console.log(err);
-    },
-    );
   }
-
 
   onLogout() {
     this.toastr.success('Succssfully Logged Out');
