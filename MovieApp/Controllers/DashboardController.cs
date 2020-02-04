@@ -32,5 +32,21 @@ namespace MovieApp.Controllers
                 return ErrorResult(result.Exception.Message);
             }
         }
+
+        [HttpPost]
+        [Route("SubmitPost")]
+        public ActionResult<Posts> SubmitPost([FromBody] Posts post)
+        {
+            var result = _service.SubmitUserPost(post);
+
+            if (result.HasValue)
+            {
+                return result.Value;
+            }
+            else
+            {
+                return ErrorResult(result.Exception.Message);
+            }
+        }
     }
 }

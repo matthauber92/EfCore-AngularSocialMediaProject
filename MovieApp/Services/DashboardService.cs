@@ -30,5 +30,36 @@ namespace MovieApp.Services
             }
             return result;
         }
+
+        //Submit User Post
+        public Result<Posts> SubmitUserPost(Posts post)
+        {
+            Result<Posts> result = new Result<Posts>();
+            try
+            {
+                Posts model = new Posts();
+                using (var transaction = _db.Database.BeginTransaction())
+                {
+                    if (post.PostId == 0)
+                    {
+                        model.PostId = post.PostId;
+                        model.Content = post.Content;
+                        model.UserId = post.UserId;
+                        model.Likes = 0;
+                        model.Comments = new List<Comments>();
+                        model.User = post.User;
+
+                        _db.Posts.Add(model);
+                        _db.SaveChanges();
+                    }
+                }
+                    result.Value = model;
+            }
+            catch (Exception ex)
+            {
+                result.Exception = ex;
+            }
+            return result;
+        }
     }
 }

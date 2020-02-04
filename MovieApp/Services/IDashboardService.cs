@@ -10,5 +10,6 @@ namespace MovieApp.Services
     public interface IDashboardService
     {
         Result<List<Posts>> ListUserPosts(int userId);
+        Result<Posts> SubmitUserPost(Posts post);
     }
 }
