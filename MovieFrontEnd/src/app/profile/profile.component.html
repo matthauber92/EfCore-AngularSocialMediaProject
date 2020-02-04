@@ -1,1 +1,11 @@
 <p>{{currentUser.userName}}</p>
+
+<div>
+  <p>Posts</p>
+  <ul *ngFor="let posts of userPosts">
+    <li>
+      {{posts.content}}
+    </li>
+
+  </ul>
+</div>
