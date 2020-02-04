@@ -1,11 +1,42 @@
-<p>{{currentUser.userName}}</p>
+<div id="UserProfile" class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+      <div id="UserInfoContainer">
+      </div>
 
-<div>
-  <p>Posts</p>
-  <ul *ngFor="let posts of userPosts">
-    <li>
-      {{posts.content}}
-    </li>
-
-  </ul>
+      <form>
+        <div id="CommentSection">
+          <!--Visible when user ID is logged in user to add post-->
+          <div id="NewPost">
+            <textarea></textarea>
+            <!--onClick call AddNewPost function-->
+            <button style="float:left; background-color:#fbb113; margin-right: 30px; margin-top: 20px;" class="btn"> + Add Post </button>
+          </div>
+          <!--loop through posts to display on page-->
+          <ul *ngFor="let posts of userPosts" style="list-style:none; float:left;">
+            <li>
+              <span style="width: 100%; float:left; font-weight: bold; font-size: 14px; color: blue; cursor:pointer;">Created By {{currentUser.userName}}</span>
+              <!--<span style="font-size: 8px; width: 100%; float:left;" data-bind="text: $data.date"></span>-->
+              <br />
+              <span style="width: 100%; float:left; min-height: 50px; text-align:center; border-bottom:1px solid black; border-top:1px solid black; padding:10px;font-weight:bold;">{{posts.content}}</span>
+              <span style="width: 100%; float:left;"> Comments </span>
+              <!--loop through comments to display-->
+              <ul *ngFor="let comments of posts.comments" style="list-style:none; float:left; width: 100%; color:gray;">
+                <li style="padding:10px;">
+                  <span>{{comments.content}}</span>
+                </li>
+              </ul>
+              <!--<span style="width: 100%; float:left;">
+                <!--data-bind to gt user comment input-->
+                <textarea></textarea>
+                <!--call AddNewComment function-->
+                <button style="float:left; background-color:#fbb113; margin-right: 30px; margin-top: 20px;" class="btn"> + Comment </button>
+                <!--relog visible when not homepage userID else display-->
+            
+            </li>
+          </ul>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
