@@ -12,7 +12,12 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-  getPosts(userID: number): Observable<Posts[]> {
-    return this.http.get<Posts[]>(this.apiUrl + '/Dashboard/GetPosts?userId=' + userID);
+  getPosts(userId: number): Observable<Posts[]> {
+    return this.http.get<Posts[]>(this.apiUrl + '/Dashboard/GetPosts?userId=' + userId);
+  }
+
+  submitPost(post: Posts, userId: number): Observable<Posts> {
+    const data = post.Content;
+    return this.http.post<Posts>(this.apiUrl + '/Dashboard/SubmitPost?post=' + post + '&userId=' + userId, data);
   }
 }

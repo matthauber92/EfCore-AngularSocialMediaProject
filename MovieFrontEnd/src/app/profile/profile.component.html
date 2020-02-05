@@ -4,14 +4,17 @@
       <div id="UserInfoContainer">
       </div>
 
-      <form>
         <div id="CommentSection">
           <!--Visible when user ID is logged in user to add post-->
-          <div id="NewPost">
-            <textarea></textarea>
-            <!--onClick call AddNewPost function-->
-            <button style="float:left; background-color:#fbb113; margin-right: 30px; margin-top: 20px;" class="btn"> + Add Post </button>
-          </div>
+
+          <form name="form" (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <div id="NewPost">
+              <input type="text" name="content" [(ngModel)]="newPost.content"/>
+              <!--onClick call AddNewPost function-->
+              <button type="submit" (click)="onSubmit()" style="float:left; background-color:#fbb113; margin-right: 30px; margin-top: 20px;" class="btn"> + Add Post </button>
+            </div>
+          </form>
+
           <!--loop through posts to display on page-->
           <ul *ngFor="let posts of userPosts" style="list-style:none; float:left;">
             <li>
@@ -36,7 +39,7 @@
             </li>
           </ul>
         </div>
-      </form>
+
     </div>
   </div>
 </div>

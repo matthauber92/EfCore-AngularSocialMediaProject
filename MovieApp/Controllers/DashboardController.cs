@@ -35,9 +35,9 @@ namespace MovieApp.Controllers
 
         [HttpPost]
         [Route("SubmitPost")]
-        public ActionResult<Posts> SubmitPost([FromBody] Posts post)
+        public ActionResult<Posts> SubmitPost([FromBody] Posts post, int userId)
         {
-            var result = _service.SubmitUserPost(post);
+            var result = _service.SubmitUserPost(post, userId);
 
             if (result.HasValue)
             {

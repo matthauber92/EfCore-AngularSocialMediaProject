@@ -11,9 +11,9 @@ export class AppUser {
 export class Posts {
   PostId?: number;
   Content?: string;
-  Likes: number;
-  User: AppUser;
-  Comments: Comments[];
+  Likes?: number;
+  //User: AppUser;
+  Comments?: Comments[];
 }
 
 export class Comments {

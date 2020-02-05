@@ -32,7 +32,7 @@ namespace MovieApp.Services
         }
 
         //Submit User Post
-        public Result<Posts> SubmitUserPost(Posts post)
+        public Result<Posts> SubmitUserPost(Posts post, int userId)
         {
             Result<Posts> result = new Result<Posts>();
             try
@@ -40,6 +40,7 @@ namespace MovieApp.Services
                 Posts model = new Posts();
                 using (var transaction = _db.Database.BeginTransaction())
                 {
+                    post.UserId = userId;
                     _db.Posts.Add(post);
                     _db.SaveChanges();
 
