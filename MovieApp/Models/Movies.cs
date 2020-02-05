@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,6 +11,7 @@ namespace MovieApp.Models
     public class Movies
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MovieId { get; set; }
         public string Source { get; set; }
         public string MovieName { get; set; }
@@ -17,6 +19,7 @@ namespace MovieApp.Models
         public string MoviePicture { get; set; }
 
         public int UserId { get; set; }
+        [JsonIgnore]
         public ApplicationUser User { get; set; }
     }
 }
