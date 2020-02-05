@@ -17,7 +17,7 @@ export class DashboardService {
   }
 
   submitPost(post: Posts, userId: number): Observable<Posts> {
-    const data = post.Content;
-    return this.http.post<Posts>(this.apiUrl + '/Dashboard/SubmitPost?post=' + post + '&userId=' + userId, data);
+    const data = post;
+    return this.http.post<Posts>(this.apiUrl + '/Dashboard/SubmitPost?userId=' + userId, data);
   }
 }

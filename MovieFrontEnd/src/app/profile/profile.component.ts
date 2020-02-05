@@ -15,12 +15,12 @@ export class ProfileComponent implements OnInit {
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
-    this.newPost.Content = "test";
-    console.log(this.newPost);
+    this.getPosts();
+  }
+
+  getPosts() {
     const me = this;
-    console.log("user: " + this.currentUser.id);
     this.dashboardService.getPosts(this.currentUser.id).subscribe(data => {
-      console.log(data);
       me.userPosts = data;
     },
       err => {
@@ -32,7 +32,8 @@ export class ProfileComponent implements OnInit {
   onSubmit() {
     const me = this;
     this.dashboardService.submitPost(this.newPost, this.currentUser.id).subscribe(data => {
-      console.log(data);
+      me.newPost.content = "";
+      me.getPosts();
     },
       err => {
         console.log(err);
