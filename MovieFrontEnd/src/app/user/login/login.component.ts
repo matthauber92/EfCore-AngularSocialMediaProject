@@ -22,13 +22,15 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    const me = this;
     this.userService.login(form.value).subscribe(
       (res: any) => {
         localStorage.setItem('token', res.token);
-        this.router.navigateByUrl('/dashboard');
+        me.router.navigateByUrl('/dashboard');
+        me.toastr.success("Welcome, " + me.formModel.UserName);
       },
       err => {
-          this.toastr.error('Incorrect username or password.', 'Login failed');
+        me.toastr.error('Incorrect username or password.', 'Login failed');
         
       }
     );

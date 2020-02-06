@@ -31,6 +31,29 @@ namespace MovieApp.Services
             return result;
         }
 
+        // Delete user posts
+        public Result<bool> DeletePost(int postId)
+        {
+            Result<bool> result = new Result<bool>();
+            try
+            {
+                using (var transaction = _db.Database.BeginTransaction())
+                {
+                    var post = _db.Posts.FirstOrDefault(p => p.PostId == postId);
+                    _db.Remove(post);
+                    _db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                result.Value = true;
+            }
+            catch (Exception ex)
+            {
+                result.Exception = ex;
+            }
+            return result;
+        }
+
         //Submit User Post
         public Result<Posts> SubmitUserPost(Posts post, int userId)
         {
@@ -47,6 +70,21 @@ namespace MovieApp.Services
                     transaction.Commit();
                 }
                     result.Value = model;
+            }
+            catch (Exception ex)
+            {
+                result.Exception = ex;
+            }
+            return result;
+        }
+
+        //Return List of User Posts
+        public Result<ApplicationUser> Search(string userName)
+        {
+            Result<ApplicationUser> result = new Result<ApplicationUser>();
+            try
+            {
+                result.Value = _db.Users.Where(u => u.UserName == userName || u.DisplayName == userName || u.UserName.StartsWith(userName) && u.UserName.EndsWith(userName)).FirstOrDefault();
             }
             catch (Exception ex)
             {

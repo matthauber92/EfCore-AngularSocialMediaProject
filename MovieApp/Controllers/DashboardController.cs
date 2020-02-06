@@ -33,11 +33,37 @@ namespace MovieApp.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        public ActionResult<bool> DeletePost(int id)
+        {
+            var result = _service.DeletePost(id);
+            if (result.HasValue)
+                return result.Value;
+            else
+                return ErrorResult(result.Exception.Message);
+        }
+
         [HttpPost]
         [Route("SubmitPost")]
         public ActionResult<Posts> SubmitPost([FromBody] Posts post, int userId)
         {
             var result = _service.SubmitUserPost(post, userId);
+
+            if (result.HasValue)
+            {
+                return result.Value;
+            }
+            else
+            {
+                return ErrorResult(result.Exception.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("UserSearch")]
+        public ActionResult<ApplicationUser> Search([FromQuery] string userName)
+        {
+            var result = _service.Search(userName);
 
             if (result.HasValue)
             {

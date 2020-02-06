@@ -9,7 +9,9 @@ namespace MovieApp.Services
 {
     public interface IDashboardService
     {
+        Result<ApplicationUser> Search(string userName);
         Result<List<Posts>> ListUserPosts(int userId);
         Result<Posts> SubmitUserPost(Posts post, int userId);
+        Result<bool> DeletePost(int postId);
     }
 }

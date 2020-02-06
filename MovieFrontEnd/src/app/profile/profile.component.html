@@ -1,45 +1,49 @@
 <div id="UserProfile" class="container">
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
-      <div id="UserInfoContainer">
-      </div>
-
-        <div id="CommentSection">
-          <!--Visible when user ID is logged in user to add post-->
-
+      <!--<div id="UserInfoContainer">
+  </div>-->
+      <div class="card mb-1">
+        <div class="card-header">
           <form name="form" (ngSubmit)="onSubmit(f)" #f="ngForm">
             <div id="NewPost">
-              <input type="text" name="content" [(ngModel)]="newPost.content"/>
-              <!--onClick call AddNewPost function-->
-              <button style="float:left; background-color:#fbb113; margin-right: 30px; margin-top: 20px;" class="btn"> + Add Post </button>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text rounded-circle mr-2" id="basic-addon1"><i class="fas fa-user"></i></span>
+                </div>
+                <input class="form-control input-lg" type="text" name="content" [(ngModel)]="newPost.content" />
+                <div class="input-group-append">
+                  <button class="input-group-text"><i class="fas fa-share"></i></button>
+                </div>
+              </div>
             </div>
           </form>
-
-          <!--loop through posts to display on page-->
-          <ul *ngFor="let posts of userPosts" style="list-style:none; float:left;">
-            <li>
-              <span style="width: 100%; float:left; font-weight: bold; font-size: 14px; color: blue; cursor:pointer;">Created By {{currentUser.userName}}</span>
-              <!--<span style="font-size: 8px; width: 100%; float:left;" data-bind="text: $data.date"></span>-->
-              <br />
-              <span style="width: 100%; float:left; min-height: 50px; text-align:center; border-bottom:1px solid black; border-top:1px solid black; padding:10px;font-weight:bold;">{{posts.content}}</span>
-              <span style="width: 100%; float:left;"> Comments </span>
-              <!--loop through comments to display-->
-              <ul *ngFor="let comments of posts.comments" style="list-style:none; float:left; width: 100%; color:gray;">
-                <li style="padding:10px;">
-                  <span>{{comments.content}}</span>
-                </li>
-              </ul>
-              <!--<span style="width: 100%; float:left;">
-                <!--data-bind to gt user comment input-->
-                <textarea></textarea>
-                <!--call AddNewComment function-->
-                <button style="float:left; background-color:#fbb113; margin-right: 30px; margin-top: 20px;" class="btn"> + Comment </button>
-                <!--relog visible when not homepage userID else display-->
-            
-            </li>
-          </ul>
         </div>
-
+      </div>
+      <div *ngFor="let posts of userPosts" class="card mb-2">
+        <div class="card-body">
+          <span><i class="mr-2 fas fa-user"></i></span>
+          <strong>{{currentUser.userName}}</strong>
+          <div class="float-right">
+            <span (click)="deletePost(posts.postId)"><i class="fas fa-times-circle"></i></span>
+          </div>
+          <div class="mb-3">{{posts.content}}</div>
+          <div class="card-footer text-muted">
+            <span style="width: 100%; float:left;"> Comments </span>
+            <ul *ngFor="let comments of posts.comments" style="list-style:none; float:left; width: 100%; color:gray;">
+              <li style="padding:10px;">
+                <span>{{comments.content}}</span>
+              </li>
+            </ul>
+            <div class="input-group mb-3">
+              <input class="form-control input-lg" type="text" name="comment" />
+              <div class="input-group-append">
+                <button class="input-group-text"><i class="far fa-comment-dots"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

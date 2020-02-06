@@ -1,6 +1,12 @@
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-dark bg-dark form-inline">
   <a class="navbar-brand text-white">Movie App</a>
-  <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
+  <div class="input-group">
+    <input class="form-control input-lg search-bar" type="text" name="user" />
+    <div class="input-group-append">
+      <button class="input-group-text"><i class="fas fa-search"></i></button>
+    </div>
+    </div>
+    <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
 </nav>
 <div class="row">
   <div class="col-12 px-0">
@@ -78,16 +84,6 @@
       </div>
   </div>
 </div>
-<!--<div class="card-body card-padded bg-white-wash" [class]="push? 'sidenavA': 'sidenavB'"> 
-
-  <div class="card m-5" style="width:18rem" *ngIf="currentUser">
-    <ul class="list-group">
-      <li class="list-group-item"><strong>Username : </strong>{{currentUser.userName}}</li>
-      <li class="list-group-item"><strong>FullName : </strong>{{currentUser.firstName + ' ' + currentUser.lastName}}</li>
-      <li class="list-group-item"><strong>Email : </strong>{{currentUser.email}}</li>
-    </ul>
-  </div>
-</div>-->
 
 <div *ngIf="currentUser">
   <app-profile [currentUser]="currentUser">

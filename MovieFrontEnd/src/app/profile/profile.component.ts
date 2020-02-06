@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DashboardService } from '../services/dashboard.service';
 import { Posts } from 'src/models';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -12,7 +13,7 @@ export class ProfileComponent implements OnInit {
   userPosts: Posts[];
   newPost: Posts = {};
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.getPosts();
@@ -29,8 +30,25 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  deletePost(postId: number) {
+    const me = this;
+    if (postId !== null) {
+      this.dashboardService.deletePost(postId).subscribe(data => {
+        me.toastr.success("Post Deleted");
+        me.getPosts();
+      },
+        err => {
+          console.log(err);
+        },
+      );
+    }
+  }
+
   onSubmit() {
     const me = this;
+    if (this.newPost.content == "")
+      return;
+
     this.dashboardService.submitPost(this.newPost, this.currentUser.id).subscribe(data => {
       me.newPost.content = "";
       me.getPosts();

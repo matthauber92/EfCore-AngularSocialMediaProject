@@ -20,4 +20,8 @@ export class DashboardService {
     const data = post;
     return this.http.post<Posts>(this.apiUrl + '/Dashboard/SubmitPost?userId=' + userId, data);
   }
+
+  deletePost(postId: number): Observable<boolean> {
+    return this.http.delete<boolean>(this.apiUrl + '/Dashboard/' + postId);
+  }
 }
