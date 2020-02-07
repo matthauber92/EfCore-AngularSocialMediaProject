@@ -60,6 +60,22 @@ namespace MovieApp.Controllers
         }
 
         [HttpPost]
+        [Route("UpdateBio")]
+        public ActionResult<string> UpdateBio(int userId, [FromBody] string bio)
+        {
+            var result = _service.UpdateBio(userId, bio);
+
+            if (result.HasValue)
+            {
+                return result.Value;
+            }
+            else
+            {
+                return ErrorResult(result.Exception.Message);
+            }
+        }
+
+        [HttpPost]
         [Route("UserSearch")]
         public ActionResult<ApplicationUser> Search([FromQuery] string userName)
         {

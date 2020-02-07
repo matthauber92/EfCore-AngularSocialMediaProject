@@ -11,6 +11,7 @@ namespace MovieApp.Services
     {
         Result<ApplicationUser> Search(string userName);
         Result<List<Posts>> ListUserPosts(int userId);
+        Result<string> UpdateBio(int userId, string bio);
         Result<Posts> SubmitUserPost(Posts post, int userId);
         Result<bool> DeletePost(int postId);
     }

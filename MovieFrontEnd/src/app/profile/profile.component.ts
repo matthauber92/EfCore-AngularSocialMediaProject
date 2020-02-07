@@ -30,6 +30,17 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  updateBio() {
+    const me = this;
+    this.dashboardService.updateBio(this.currentUser.bio, this.currentUser.id).subscribe(data => {
+      console.log(data);
+    },
+      err => {
+        console.log(err);
+      },
+    );
+  }
+
   deletePost(postId: number) {
     const me = this;
     if (postId !== null) {

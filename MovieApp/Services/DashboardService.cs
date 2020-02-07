@@ -78,7 +78,34 @@ namespace MovieApp.Services
             return result;
         }
 
-        //Return List of User Posts
+        //Submit User Post
+        public Result<string> UpdateBio(int userId, string bio)
+        {
+            Result<string> result = new Result<string>();
+            try
+            {
+             
+                using (var transaction = _db.Database.BeginTransaction())
+                {
+                    var user = _db.Users.Where(u => u.Id == userId).FirstOrDefault();
+                    if (user.Bio == "")
+                        user.Bio += bio;
+                    else
+                        user.Bio = bio;
+                    _db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                result.Value = bio;
+            }
+            catch (Exception ex)
+            {
+                result.Exception = ex;
+            }
+            return result;
+        }
+
+        //Search Users
         public Result<ApplicationUser> Search(string userName)
         {
             Result<ApplicationUser> result = new Result<ApplicationUser>();

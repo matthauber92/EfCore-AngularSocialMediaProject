@@ -21,6 +21,10 @@ export class DashboardService {
     return this.http.post<Posts>(this.apiUrl + '/Dashboard/SubmitPost?userId=' + userId, data);
   }
 
+  updateBio(userId: number, bio: string): Observable<string> {
+    return this.http.post<string>(this.apiUrl + '/Dashboard/UpdateBio?userId=' + userId, bio);
+  }
+
   deletePost(postId: number): Observable<boolean> {
     return this.http.delete<boolean>(this.apiUrl + '/Dashboard/' + postId);
   }

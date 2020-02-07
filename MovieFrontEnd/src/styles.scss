@@ -18,6 +18,12 @@ button {
   cursor: pointer;
 }
 
+.card .card-title {
+  font: 500 1rem Montserrat;
+  color: #3a4f6e;
+  margin-bottom: 0rem;
+}
+
 .fa-times-circle {
   cursor: pointer;
 }
@@ -25,28 +31,6 @@ button {
 #toast-container > div {
   opacity: 1;
 }
-
-.wrapper {
-    display: flex;
-    align-items: center;
-    flex-direction: column; 
-    justify-content: center;
-    width: 100%;
-    padding: 20px;
-  }
-
-  .wrapped-div {
-    -webkit-border-radius: 10px 10px 10px 10px;
-    border-radius: 10px 10px 10px 10px;
-    background: #2e3137;
-    padding: 30px;
-    width: 90%;
-    max-width: 450px;
-    position: relative;
-    padding: 0px;
-    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-  }
 
   /* Tabs */
 .tab-header{
