@@ -87,11 +87,11 @@ namespace MovieApp.Services
              
                 using (var transaction = _db.Database.BeginTransaction())
                 {
-                    var user = _db.Users.Where(u => u.Id == userId).FirstOrDefault();
-                    if (user.Bio == "")
-                        user.Bio += bio;
+                    var user = GetUserById(userId);
+                    if (user.Value.Bio == "")
+                        user.Value.Bio += bio;
                     else
-                        user.Bio = bio;
+                        user.Value.Bio = bio;
                     _db.SaveChanges();
 
                     transaction.Commit();
@@ -112,6 +112,24 @@ namespace MovieApp.Services
             try
             {
                 result.Value = _db.Users.Where(u => u.UserName == userName || u.DisplayName == userName || u.UserName.StartsWith(userName) && u.UserName.EndsWith(userName)).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                result.Exception = ex;
+            }
+            return result;
+        }
+
+        public Result<ApplicationUser> GetUserById(int userId)
+        {
+            Result<ApplicationUser> result = new Result<ApplicationUser>();
+            try
+            {
+                result.Value = _db.Users.Where(u => u.Id == userId).FirstOrDefault();
+                if (result.Value == null)
+                {
+                    throw new Exception("No user for id: " + userId);
+                }
             }
             catch (Exception ex)
             {

@@ -61,7 +61,7 @@ namespace MovieApp.Controllers
 
         [HttpPost]
         [Route("UpdateBio")]
-        public ActionResult<string> UpdateBio(int userId, [FromBody] string bio)
+        public ActionResult<string> UpdateBio(int userId, string bio)
         {
             var result = _service.UpdateBio(userId, bio);
 
