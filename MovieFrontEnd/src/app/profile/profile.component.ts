@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { DashboardService } from '../services/dashboard.service';
 import { Posts } from 'src/models';
 import { ToastrService } from 'ngx-toastr';
@@ -12,6 +12,7 @@ export class ProfileComponent implements OnInit {
   @Input() currentUser;
   userPosts: Posts[];
   newPost: Posts = {};
+  @ViewChild('collapseBio', { static: false }) bioCollapse: ElementRef;
 
   constructor(private dashboardService: DashboardService, private toastr: ToastrService) { }
 
@@ -32,11 +33,15 @@ export class ProfileComponent implements OnInit {
 
   updateBio() {
     const me = this;
-    this.dashboardService.updateBio(this.currentUser.bio, this.currentUser.id).subscribe(data => {
+    //console.log(this.currentUser.bio);
+    this.dashboardService.updateBio(this.currentUser).subscribe(data => {
       console.log(data);
+      me.toastr.success("Bio Successfully Updated");
+      me.bioCollapse.nativeElement.click();
     },
       err => {
         console.log(err);
+        me.toastr.error("Bio Could Not Be Updated");
       },
     );
   }

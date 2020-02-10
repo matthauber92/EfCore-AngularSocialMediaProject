@@ -14,15 +14,20 @@ import { AppUser } from 'src/models';
 export class DashboardComponent implements OnInit {
 
   currentUser: AppUser;
-  push: boolean = false;
+  //push: boolean = false;
+  searchedUser: string;
 
   constructor(private router: Router, private userService: UserService, private dashboardService: DashboardService, private toastr: ToastrService, private spinner: NgxSpinnerModule) { }
 
   ngOnInit() {
+    this.getUser();
+  }
+
+  getUser() {
     const me = this;
     this.userService.currentUser.subscribe(result => {
       me.currentUser = result;
-      console.log(me.currentUser)
+      //console.log(me.currentUser)
     },
       err => {
         console.log(err);
@@ -34,5 +39,19 @@ export class DashboardComponent implements OnInit {
     this.toastr.success('Succssfully Logged Out');
     localStorage.removeItem('token');
     this.router.navigate(['/user/login']);
+  }
+
+  userSearch() {
+    const me = this;
+    this.dashboardService.searchUser(this.searchedUser).subscribe(result => {
+      me.currentUser = result;
+      //me.getUser();
+      me.router.navigate(["profile"]); 
+      console.log(me.currentUser);
+    },
+      err => {
+        console.log(err);
+      },
+    );
   }
 }

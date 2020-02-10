@@ -61,9 +61,9 @@ namespace MovieApp.Controllers
 
         [HttpPost]
         [Route("UpdateBio")]
-        public ActionResult<string> UpdateBio(int userId, string bio)
+        public ActionResult<ApplicationUser> UpdateBio([FromBody] ApplicationUser userBio)
         {
-            var result = _service.UpdateBio(userId, bio);
+            var result = _service.UpdateBio(userBio);
 
             if (result.HasValue)
             {
@@ -75,7 +75,7 @@ namespace MovieApp.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("UserSearch")]
         public ActionResult<ApplicationUser> Search([FromQuery] string userName)
         {

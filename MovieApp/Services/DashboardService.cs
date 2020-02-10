@@ -79,24 +79,25 @@ namespace MovieApp.Services
         }
 
         //Submit User Post
-        public Result<string> UpdateBio(int userId, string bio)
+        public Result<ApplicationUser> UpdateBio(ApplicationUser userBio)
         {
-            Result<string> result = new Result<string>();
+            Result<ApplicationUser> result = new Result<ApplicationUser>();
             try
             {
              
                 using (var transaction = _db.Database.BeginTransaction())
                 {
-                    var user = GetUserById(userId);
-                    if (user.Value.Bio == "")
-                        user.Value.Bio += bio;
+                    var user = GetUserById(userBio.Id);
+                    //Needs Reviewed - has Bio?
+                    if (!user.HasValue)
+                        user.Value.Bio = userBio.Bio;
                     else
-                        user.Value.Bio = bio;
+                        user.Value.Bio = userBio.Bio;
                     _db.SaveChanges();
 
                     transaction.Commit();
                 }
-                result.Value = bio;
+                result.Value = userBio;
             }
             catch (Exception ex)
             {
@@ -111,7 +112,7 @@ namespace MovieApp.Services
             Result<ApplicationUser> result = new Result<ApplicationUser>();
             try
             {
-                result.Value = _db.Users.Where(u => u.UserName == userName || u.DisplayName == userName || u.UserName.StartsWith(userName) && u.UserName.EndsWith(userName)).FirstOrDefault();
+                result.Value = _db.Users.Where(u => u.UserName == userName || u.DisplayName == userName || u.UserName.StartsWith(userName) || u.UserName.EndsWith(userName)).FirstOrDefault();
             }
             catch (Exception ex)
             {
