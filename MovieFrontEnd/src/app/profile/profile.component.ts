@@ -13,10 +13,15 @@ export class ProfileComponent implements OnInit {
   userPosts: Posts[];
   newPost: Posts = {};
   @ViewChild('collapseBio', { static: false }) bioCollapse: ElementRef;
+  @Input() loggedUser;
 
   constructor(private dashboardService: DashboardService, private toastr: ToastrService) { }
 
   ngOnInit() {
+    this.getPosts();
+  }
+
+  ngOnChanges() {
     this.getPosts();
   }
 
