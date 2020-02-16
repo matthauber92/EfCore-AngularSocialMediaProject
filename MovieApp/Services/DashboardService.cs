@@ -78,7 +78,7 @@ namespace MovieApp.Services
             return result;
         }
 
-        //Submit User Post
+        //Update User Bio
         public Result<ApplicationUser> UpdateBio(ApplicationUser userBio)
         {
             Result<ApplicationUser> result = new Result<ApplicationUser>();
@@ -131,6 +131,55 @@ namespace MovieApp.Services
                 {
                     throw new Exception("No user for id: " + userId);
                 }
+            }
+            catch (Exception ex)
+            {
+                result.Exception = ex;
+            }
+            return result;
+        }
+
+        //Submit User Post
+        public Result<Comments> SubmitUserComment(Comments comment, int postId, string userName)
+        {
+            Result<Comments> result = new Result<Comments>();
+            try
+            {
+                Comments model = new Comments();
+                using (var transaction = _db.Database.BeginTransaction())
+                {
+                    comment.PostId = postId;
+                    comment.UserName = userName;
+                    _db.Comments.Add(comment);
+                    _db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                result.Value = model;
+            }
+            catch (Exception ex)
+            {
+                result.Exception = ex;
+            }
+            return result;
+        }
+
+        //Submit User Post
+        public Result<int> LikePost(int postId)
+        {
+            Result<int> result = new Result<int>();
+            try
+            {
+                int model = new int();
+                using (var transaction = _db.Database.BeginTransaction())
+                {
+                    var post = _db.Posts.Where(p => p.PostId == postId).FirstOrDefault();
+                    post.Likes++;
+                    _db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                result.Value = model;
             }
             catch (Exception ex)
             {

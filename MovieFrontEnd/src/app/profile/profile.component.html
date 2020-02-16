@@ -51,19 +51,20 @@
           </div>
           <div class="nav navbar">
             <h5><span style="cursor: pointer;" class="badge badge-light"><i class="far fa-comment mr-2"></i>{{posts.comments.length}}</span></h5>
-            <h5><span style="cursor: pointer;" class="badge badge-light"><i class="far fa-thumbs-up mr-2"></i>{{posts.likes}}</span></h5>
+            <h5 (click)="likePost(posts.postId)"><span style="cursor: pointer;" class="badge badge-light"><i class="far fa-thumbs-up mr-2"></i>{{posts.likes}}</span></h5>
           </div>
           <div class="card-footer text-muted">
             <span style="width: 100%; float:left;"> Comments </span>
             <ul *ngFor="let comments of posts.comments" style="list-style:none; float:left; width: 100%; color:gray;">
               <li style="padding:10px;">
+                <div>{{comments.userName}}</div>
                 <span>{{comments.content}}</span>
               </li>
             </ul>
             <div class="input-group mb-3">
-              <input class="form-control input-lg" type="text" name="comment" />
+              <input [(ngModel)]="this.newComment.content" class="form-control input-lg" type="text" name="comment" />
               <div class="input-group-append">
-                <button class="input-group-text"><i class="far fa-comment-dots"></i></button>
+                <button (click)="onSubmitComment(posts.postId)" class="input-group-text"><i class="far fa-comment-dots"></i></button>
               </div>
             </div>
           </div>

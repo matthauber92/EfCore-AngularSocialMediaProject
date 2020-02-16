@@ -90,5 +90,37 @@ namespace MovieApp.Controllers
                 return ErrorResult(result.Exception.Message);
             }
         }
+
+        [HttpPost]
+        [Route("SubmitComment")]
+        public ActionResult<Comments> SubmitComment([FromBody] Comments comment, int postId, string userName)
+        {
+            var result = _service.SubmitUserComment(comment, postId, userName);
+
+            if (result.HasValue)
+            {
+                return result.Value;
+            }
+            else
+            {
+                return ErrorResult(result.Exception.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("LikePost")]
+        public ActionResult<int> LikePost(int postId)
+        {
+            var result = _service.LikePost(postId);
+
+            if (result.HasValue)
+            {
+                return result.Value;
+            }
+            else
+            {
+                return ErrorResult(result.Exception.Message);
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@
   <div class="col-12 px-0">
       <div id="library-nav" class="sub-nav">
           <ul class="nav nav-tabs nav-justified">
-              <li class="nav-item">
+              <li class="nav-item" routerLink="/dashboard/profile">
                   <a href="#alerts" class="nav-link nav-primary active pl-4">
                           <div class="nav-icon float-left">
                               <div class="nav-icon-bg d-block"><i class="fas fa-user"></i></div>
@@ -24,7 +24,7 @@
                   </a>
               </li>
               <li class="nav-item">
-                  <a href="#buttons" class="nav-link nav-green">
+                  <a href="#buttons" class="nav-link nav-green" routerLink="/dashboard/movies">
               
                           <div class="nav-icon float-left">
                               <div class="nav-icon-bg d-block"><i class="fas fa-film"></i></div>
@@ -86,7 +86,9 @@
 </div>
 
 <div *ngIf="currentUser">
-  <app-profile [currentUser]="currentUser" [loggedUser]="loggedUser">
+  <app-profile [currentUser]="currentUser" [loggedUser]="loggedUser" [userName]="userName">
 
   </app-profile>
+
+  <!--<router-outlet></router-outlet>-->
 </div>

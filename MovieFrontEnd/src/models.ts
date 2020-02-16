@@ -21,5 +21,6 @@ export class Comments {
   title?: string;
   content?: string;
   //User: AppUser;
+  userName?: string;
   posts?: Posts;
 }

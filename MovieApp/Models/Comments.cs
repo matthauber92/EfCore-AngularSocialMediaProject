@@ -16,9 +16,11 @@ namespace MovieApp.Models
         public string Title { get; set; }
         public string Content { get; set; }
 
-        public string UserId { get; set; }
-        [JsonIgnore]
-        public ApplicationUser User { get; set; }
+        //TODO - 'FK_Comments_AspNetUsers_UserId' on table 'Comments' may cause cycles or multiple cascade paths.
+        //public int UserId { get; set; }
+        //[JsonIgnore]
+        //public ApplicationUser User { get; set; }
+        public string UserName { get; set; }
 
         public int PostId { get; set; }
         [JsonIgnore]

@@ -203,15 +203,11 @@ namespace MovieApp.Migrations
 
                     b.Property<string>("Title");
 
-                    b.Property<string>("UserId");
-
-                    b.Property<int?>("UserId1");
+                    b.Property<string>("UserName");
 
                     b.HasKey("CommentId");
 
                     b.HasIndex("PostId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Comments");
                 });
@@ -326,10 +322,6 @@ namespace MovieApp.Migrations
                         .WithMany("Comments")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("MovieApp.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("MovieApp.Models.Friends", b =>

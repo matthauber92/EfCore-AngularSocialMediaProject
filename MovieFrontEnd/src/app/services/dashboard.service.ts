@@ -33,4 +33,14 @@ export class DashboardService {
   searchUser(userName: string): Observable<AppUser> {
     return this.http.get<AppUser>(this.apiUrl + '/Dashboard/UserSearch?userName=' + userName);
   }
+
+  submitComment(comment: Comments, postId: number, userName: string): Observable<Comments> {
+    const data = comment;
+    return this.http.post<Comments>(this.apiUrl + '/Dashboard/SubmitComment?postId=' + postId + '&userName=' + userName, data);
+  }
+
+  likePost(postId: number): Observable<number> {
+    return this.http.post<number>(this.apiUrl + '/Dashboard/LikePost?postId=' + postId, postId);
+  }
+
 }
