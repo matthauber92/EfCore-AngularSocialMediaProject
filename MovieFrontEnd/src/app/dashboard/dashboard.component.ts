@@ -13,12 +13,10 @@ import { AppUser } from 'src/models';
 })
 export class DashboardComponent implements OnInit {
 
-  currentUser: AppUser;
   searchedUser: string;
-  loggedUser: number;
-  userName: string;
+  currentUser: AppUser = {};
 
-  constructor(private router: Router, private userService: UserService, private dashboardService: DashboardService, private toastr: ToastrService, private spinner: NgxSpinnerModule) { }
+  constructor(private router: Router, private userService: UserService, private toastr: ToastrService, private spinner: NgxSpinnerModule) { }
 
   ngOnInit() {
     this.getUser();
@@ -28,8 +26,6 @@ export class DashboardComponent implements OnInit {
     const me = this;
     this.userService.currentUser.subscribe(result => {
       me.currentUser = result;
-      me.loggedUser = me.currentUser.id;
-      me.userName = me.currentUser.userName;
     },
       err => {
         console.log(err);
@@ -44,15 +40,7 @@ export class DashboardComponent implements OnInit {
   }
 
   userSearch() {
-    const me = this;
-    this.dashboardService.searchUser(this.searchedUser).subscribe(result => {
-      me.currentUser = result;
-      console.log(me.currentUser)
-      me.router.navigateByUrl('/dashboard');
-    },
-      err => {
-        console.log(err);
-      },
-    );
+    this.router.navigateByUrl('/dashboard/profile/' + this.searchedUser);
   }
 }
+

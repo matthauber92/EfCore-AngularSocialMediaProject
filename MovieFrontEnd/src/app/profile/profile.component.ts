@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { DashboardService } from '../services/dashboard.service';
-import { Posts, Comments } from 'src/models';
+import { Posts, Comments, AppUser } from 'src/models';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../services/user.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -10,52 +11,75 @@ import { UserService } from '../services/user.service';
 })
 export class ProfileComponent implements OnInit {
 
-  @Input() currentUser;
+  currentUser: AppUser = {};
   userPosts: Posts[];
   newPost: Posts = {};
   newComment: Comments = {};
   @ViewChild('collapseBio', { static: false }) bioCollapse: ElementRef;
-  @Input() loggedUser;
-  @Input() userName;
+  loggedUser: string;
+  userSearched: string;
+  userProfile: AppUser = {};
 
-  constructor(private dashboardService: DashboardService, private userService: UserService, private toastr: ToastrService) { }
+  constructor(private dashboardService: DashboardService, private route: ActivatedRoute, private userService: UserService, private toastr: ToastrService) {
+    const me = this;
+    this.route.params.subscribe(params => {
+      me.userSearched = params.id;
+      me.searchUser();
+    });
+  }
 
   ngOnInit() {
-    this.getPosts();
-    console.log(this.currentUser);
+    this.getUser();
   }
 
-  ngOnChanges() {
-    this.getPosts();
+  getUser() {
+    const me = this;
+    this.userService.currentUser.subscribe(result => {
+      me.currentUser = result;
+      me.loggedUser = me.currentUser.userName;
+      me.getPosts();
+    });
   }
 
-  //getUser() {
-  //  const me = this;
-  //  this.userService.currentUser.subscribe(result => {
-  //    me.currentUser = result;
-  //    //me.loggedUser = me.currentUser.id;
-  //    //me.userName = me.currentUser.userName;
-  //  },
-  //    err => {
-  //      console.log(err);
-  //    },
-  //  );
-  //}
+  searchUser() {
+    const me = this;
+    if (this.userSearched !== this.currentUser.userName) {
+      this.dashboardService.searchUser(this.userSearched).subscribe(result => {
+        me.userProfile = result;
+        me.getPosts();
+      },
+        err => {
+          console.log(err);
+        },
+      );
+    } else {
+      this.getPosts();
+    }
+  }
 
   getPosts() {
     const me = this;
-    this.dashboardService.getPosts(this.currentUser.id).subscribe(data => {
-      me.userPosts = data;
-    },
-      err => {
-        console.log(err);
+    if (me.userSearched !== me.loggedUser) {
+      this.dashboardService.getPosts(this.userProfile.id).subscribe(data => {
+        me.userPosts = data;
       },
-    );
+        err => {
+          console.log(err);
+        },
+      );
+    } else {
+      this.dashboardService.getPosts(this.currentUser.id).subscribe(data => {
+        me.userPosts = data;
+      },
+        err => {
+          console.log(err);
+        },
+      );
+    }
   }
 
   updateBio() {
     const me = this;
-    //console.log(this.currentUser.bio);
     this.dashboardService.updateBio(this.currentUser).subscribe(data => {
       console.log(data);
       me.toastr.success("Bio Successfully Updated");
@@ -102,7 +126,7 @@ export class ProfileComponent implements OnInit {
     if (this.newComment.content == "")
       return;
 
-    this.dashboardService.submitComment(this.newComment, postId, this.userName).subscribe(data => {
+    this.dashboardService.submitComment(this.newComment, postId, this.loggedUser).subscribe(data => {
       me.newComment.content = "";
       me.getPosts();
     },

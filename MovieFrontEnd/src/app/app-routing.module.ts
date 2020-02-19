@@ -17,11 +17,11 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'dashboard', component: DashboardComponent, //children: [
+    path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
+    children: [
       //{ path: 'movies', component: MovieComponent },
-      //{ path: 'profile/:id', component: ProfileComponent }
-    //],
-    canActivate: [AuthGuard]
+      { path: 'profile/:id', component: ProfileComponent }
+    ]
   }
 ];
 
