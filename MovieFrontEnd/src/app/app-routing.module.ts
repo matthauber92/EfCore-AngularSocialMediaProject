@@ -6,6 +6,7 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { LoginComponent } from './user/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
+import { FeedComponent } from './feed/feed.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/user/login',pathMatch:'full'},
@@ -20,7 +21,8 @@ const routes: Routes = [
     path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
     children: [
       //{ path: 'movies', component: MovieComponent },
-      { path: 'profile/:id', component: ProfileComponent }
+      { path: 'profile/:id', component: ProfileComponent, data: { breadcrumb: 'Profile' } },
+      { path: 'feed', component: FeedComponent, data: { breadcrumb: 'Feed' } }
     ]
   }
 ];

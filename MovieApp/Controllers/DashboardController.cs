@@ -33,6 +33,22 @@ namespace MovieApp.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("ListAllPosts")]
+        public ActionResult<List<Posts>> ListAllPosts()
+        {
+            var result = _service.ListAllUserPosts();
+
+            if (result.HasValue)
+            {
+                return result.Value;
+            }
+            else
+            {
+                return ErrorResult(result.Exception.Message);
+            }
+        }
+
         [HttpDelete("{id}")]
         public ActionResult<bool> DeletePost(int id)
         {

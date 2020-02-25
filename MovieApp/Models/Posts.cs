@@ -17,7 +17,7 @@ namespace MovieApp.Models
         public int Likes { get; set; }
 
         public int UserId { get; set; }
-        [JsonIgnore]
+        [NotMapped]
         public ApplicationUser User { get; set; }
 
         public List<Comments> Comments { get; set; }

@@ -31,6 +31,21 @@ namespace MovieApp.Services
             return result;
         }
 
+        //Return List of Recent Posts for Feed
+        public Result<List<Posts>> ListAllUserPosts()
+        {
+            Result<List<Posts>> result = new Result<List<Posts>>();
+            try
+            {
+                result.Value = _db.Posts.Include(u => u.User).Include(c => c.Comments).OrderByDescending(o => o.PostId).ToList();
+            }
+            catch (Exception ex)
+            {
+                result.Exception = ex;
+            }
+            return result;
+        }
+
         // Delete user posts
         public Result<bool> DeletePost(int postId)
         {
@@ -121,6 +136,7 @@ namespace MovieApp.Services
             return result;
         }
 
+        // Get User
         public Result<ApplicationUser> GetUserById(int userId)
         {
             Result<ApplicationUser> result = new Result<ApplicationUser>();
@@ -139,7 +155,7 @@ namespace MovieApp.Services
             return result;
         }
 
-        //Submit User Post
+        //Submit User Comment
         public Result<Comments> SubmitUserComment(Comments comment, int postId, string userName)
         {
             Result<Comments> result = new Result<Comments>();
@@ -164,7 +180,7 @@ namespace MovieApp.Services
             return result;
         }
 
-        //Submit User Post
+        //Like User Post
         public Result<int> LikePost(int postId)
         {
             Result<int> result = new Result<int>();

@@ -16,13 +16,16 @@ export class DashboardService {
     return this.http.get<Posts[]>(this.apiUrl + '/Dashboard/GetPosts?userId=' + userId);
   }
 
+  listAllPosts(): Observable<Posts[]> {
+    return this.http.get<Posts[]>(this.apiUrl + '/Dashboard/ListAllPosts');
+  }
+
   submitPost(post: Posts, userId: number): Observable<Posts> {
     const data = post;
     return this.http.post<Posts>(this.apiUrl + '/Dashboard/SubmitPost?userId=' + userId, data);
   }
 
   updateBio(appUser: AppUser): Observable<AppUser> {
-    //console.log(bio + " bio");
     return this.http.post<AppUser>(this.apiUrl + '/Dashboard/UpdateBio?userId=' + appUser.id, appUser);
   }
 
