@@ -76,6 +76,22 @@ namespace MovieApp.Controllers
         }
 
         [HttpPost]
+        [Route("RePost")]
+        public ActionResult<Posts> RePost(int postId, int userId, string rePostUser)
+        {
+            var result = _service.RePost(postId, userId, rePostUser);
+
+            if (result.HasValue)
+            {
+                return result.Value;
+            }
+            else
+            {
+                return ErrorResult(result.Exception.Message);
+            }
+        }
+
+        [HttpPost]
         [Route("UpdateBio")]
         public ActionResult<ApplicationUser> UpdateBio([FromBody] ApplicationUser userBio)
         {

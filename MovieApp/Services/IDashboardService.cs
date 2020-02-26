@@ -14,6 +14,7 @@ namespace MovieApp.Services
         Result<List<Posts>> ListAllUserPosts();
         Result<ApplicationUser> UpdateBio(ApplicationUser userBio);
         Result<Posts> SubmitUserPost(Posts post, int userId);
+        Result<Posts> RePost(int postId, int userId, string rePostUser);
         Result<bool> DeletePost(int postId);
         Result<Comments> SubmitUserComment(Comments comment, int postId, string userName);
         Result<int> LikePost(int postId);

@@ -93,6 +93,33 @@ namespace MovieApp.Services
             return result;
         }
 
+        //RePost User Post
+        public Result<Posts> RePost(int postId, int userId, string rePostUser)
+        {
+            Result<Posts> result = new Result<Posts>();
+            try
+            {
+                Posts model = new Posts();
+                using (var transaction = _db.Database.BeginTransaction())
+                {
+                    var post = _db.Posts.Where(p => p.PostId == postId).FirstOrDefault();
+                    model.UserId = userId;
+                    model.RePostUser = rePostUser;
+                    model.Content = post.Content;
+                    _db.Posts.Add(model);
+                    _db.SaveChanges();
+
+                    transaction.Commit();
+                }
+                result.Value = model;
+            }
+            catch (Exception ex)
+            {
+                result.Exception = ex;
+            }
+            return result;
+        }
+
         //Update User Bio
         public Result<ApplicationUser> UpdateBio(ApplicationUser userBio)
         {

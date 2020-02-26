@@ -15,6 +15,7 @@ namespace MovieApp.Models
         public int PostId { get; set; }
         public string Content { get; set; }
         public int Likes { get; set; }
+        public string RePostUser { get; set; }
 
         public int UserId { get; set; }
         [NotMapped]
