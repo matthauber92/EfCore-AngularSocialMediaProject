@@ -10,7 +10,7 @@
         <h5><span style="cursor: pointer;" class="badge badge-light"><i class="far fa-comment mr-2"></i>{{posts.comments.length}}</span></h5>
         <h5 (click)="likePost(posts.postId)"><span style="cursor: pointer;" class="badge badge-light"><i class="far fa-thumbs-up mr-2"></i>{{posts.likes}}</span></h5>
       </div>
-      <div class="card-footer text-muted">
+      <div *ngIf="posts.comments.length !== 0" class="card-footer text-muted">
         <span style="width: 100%; float:left;"> Comments </span>
         <ul *ngFor="let comments of posts.comments" class="mt-4" style="list-style:none;">
           <li style="padding:10px;">
