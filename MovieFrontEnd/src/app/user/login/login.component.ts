@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('token') != null)
-      this.router.navigateByUrl('/dashboard/profile/' + this.formModel.UserName);
+      this.router.navigateByUrl('/dashboard/feed');
   }
 
   onSubmit(form: NgForm) {
