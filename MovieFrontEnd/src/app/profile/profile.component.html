@@ -45,7 +45,7 @@
           <span><i class="mr-2 fas fa-user"></i></span>
           <strong *ngIf="(loggedUser == currentUser.userName) && userSearched == currentUser.userName">{{currentUser.userName}}</strong>
           <strong *ngIf="userSearched !== loggedUser">{{userProfile.userName}}</strong>
-          <span class="ml-2" *ngIf="userSearched !== loggedUser"><i class="fas fa-retweet"></i></span>
+          <span class="ml-2"  style="cursor: pointer;" *ngIf="userSearched !== loggedUser"><i class="fas fa-retweet"></i></span>
           <div *ngIf="(loggedUser == currentUser.userName) && userSearched == currentUser.userName" class="float-right">
             <span (click)="deletePost(posts.postId)"><i class="fas fa-times-circle"></i></span>
           </div>

@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getUser();
+     this.getUser();
   }
 
   getUser() {
@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
 
   getPosts() {
     const me = this;
-    if (me.userSearched !== me.loggedUser) {
+    if (this.userSearched !== this.loggedUser) {
       this.dashboardService.getPosts(this.userProfile.id).subscribe(data => {
         me.userPosts = data;
       },

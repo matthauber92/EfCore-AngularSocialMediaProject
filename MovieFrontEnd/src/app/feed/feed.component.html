@@ -18,6 +18,12 @@
             <span>{{comments.content}}</span>
           </li>
         </ul>
+        <div class="input-group mb-3">
+          <input [(ngModel)]="newComment.content" class="form-control input-lg" type="text" name="comment" />
+          <div class="input-group-append">
+            <button (click)="onSubmitComment(posts.postId)" class="input-group-text"><i class="far fa-comment-dots"></i></button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
