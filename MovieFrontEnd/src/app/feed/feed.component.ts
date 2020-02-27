@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../services/dashboard.service';
 import { Posts, Comments, AppUser } from 'src/models';
 import { UserService } from '../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-feed',
@@ -15,7 +16,7 @@ export class FeedComponent implements OnInit {
   newComment: Comments = {};
   loggedUser: string;
 
-  constructor(private dashboardService: DashboardService, private userService: UserService) { }
+  constructor(private dashboardService: DashboardService, private userService: UserService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.getUser();
@@ -56,10 +57,36 @@ export class FeedComponent implements OnInit {
     );
   }
 
+  deletePost(postId: number) {
+    const me = this;
+    if (postId !== null) {
+      this.dashboardService.deletePost(postId).subscribe(data => {
+        me.toastr.success("Post Deleted");
+        me.getFeed();
+      },
+        err => {
+          console.log(err);
+        },
+      );
+    }
+  }
+
   likePost(postId: number) {
     const me = this;
     this.dashboardService.likePost(postId).subscribe(data => {
       me.getFeed();
+    },
+      err => {
+        console.log(err);
+      },
+    );
+  }
+
+  rePost(postId: number, userId: number, rePostUser: string) {
+    const me = this;
+    this.dashboardService.rePost(postId, userId, rePostUser).subscribe(data => {
+      me.getFeed();
+      me.toastr.success("Successfully Re-Posted!");
     },
       err => {
         console.log(err);

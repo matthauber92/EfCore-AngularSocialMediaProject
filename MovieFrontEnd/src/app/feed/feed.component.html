@@ -1,8 +1,15 @@
 <div *ngIf="feed" id="UserProfile" class="container">
   <div *ngFor="let posts of feed" class="card card-shadow-sm mb-2">
     <div class="card-body">
+      <div *ngIf="currentUser.userName == posts.user.userName" class="float-right">
+        <span (click)="deletePost(posts.postId)"><i class="fas fa-times-circle"></i></span>
+      </div>
+      <div *ngIf="(posts.rePostUser !== null)" class="breadcrumb mr-5">
+        <strong><i>Reposted from: </i>{{posts.rePostUser}}</strong>
+      </div>
       <span><i class="mr-2 fas fa-user"></i></span>
       <strong>{{posts.user.userName}}</strong>
+      <span class="ml-2" (click)="rePost(posts.postId, currentUser.id, posts.user.userName)" style="cursor: pointer;" *ngIf="currentUser.userName !== posts.user.userName"><i class="fas fa-retweet"></i></span>
       <div class="mb-3">
         {{posts.content}}
       </div>
