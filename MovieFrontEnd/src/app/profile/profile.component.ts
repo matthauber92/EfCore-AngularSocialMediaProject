@@ -147,4 +147,16 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  rePost(postId: number, userId: number, rePostUser: string) {
+    const me = this;
+    this.dashboardService.rePost(postId, userId, rePostUser).subscribe(data => {
+      me.getPosts();
+      me.toastr.success("Successfully Re-Posted!");
+    },
+      err => {
+        console.log(err);
+      },
+    );
+  }
+
 }

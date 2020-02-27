@@ -12,6 +12,7 @@ export class Posts {
   postId?: number;
   content?: string;
   likes?: number;
+  rePostUser?: string;
   //User: AppUser;
   comments?: Comments[];
 }

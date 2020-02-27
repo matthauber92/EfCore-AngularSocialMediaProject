@@ -46,4 +46,8 @@ export class DashboardService {
     return this.http.post<number>(this.apiUrl + '/Dashboard/LikePost?postId=' + postId, postId);
   }
 
+  rePost(postId: number, userId: number, rePostUser: string): Observable<Posts> {
+    console.log(rePostUser)
+    return this.http.post<Posts>(this.apiUrl + '/Dashboard/RePost?postId=' + postId + '&userId=' + userId + '&rePostUser=' + rePostUser, postId);
+  }
 }

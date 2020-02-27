@@ -77,7 +77,7 @@ namespace MovieApp.Controllers
 
         [HttpPost]
         [Route("RePost")]
-        public ActionResult<Posts> RePost(int postId, int userId, string rePostUser)
+        public ActionResult<Posts> RePost([FromBody] int postId, int userId, string rePostUser)
         {
             var result = _service.RePost(postId, userId, rePostUser);
 

@@ -42,10 +42,11 @@
       </div>
       <div *ngFor="let posts of userPosts" class="card card-shadow-sm mb-2">
         <div class="card-body">
+          <div><strong *ngIf="(posts.rePostUser !== null)">Reposted from: {{posts.rePostUser}}</strong></div>
           <span><i class="mr-2 fas fa-user"></i></span>
           <strong *ngIf="(loggedUser == currentUser.userName) && userSearched == currentUser.userName">{{currentUser.userName}}</strong>
           <strong *ngIf="userSearched !== loggedUser">{{userProfile.userName}}</strong>
-          <span class="ml-2"  style="cursor: pointer;" *ngIf="userSearched !== loggedUser"><i class="fas fa-retweet"></i></span>
+          <span class="ml-2" (click)="rePost(posts.postId, currentUser.id, userProfile.userName)" style="cursor: pointer;" *ngIf="userSearched !== loggedUser"><i class="fas fa-retweet"></i></span>
           <div *ngIf="(loggedUser == currentUser.userName) && userSearched == currentUser.userName" class="float-right">
             <span (click)="deletePost(posts.postId)"><i class="fas fa-times-circle"></i></span>
           </div>
