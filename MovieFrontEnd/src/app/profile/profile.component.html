@@ -46,7 +46,7 @@
             <span (click)="deletePost(posts.postId)"><i class="fas fa-times-circle"></i></span>
           </div>
           <div *ngIf="(posts.rePostUser !== null)" class="breadcrumb mr-5">
-            <strong><i>Reposted from: </i>{{posts.rePostUser}}</strong>
+            <strong  style="cursor: pointer;" routerLink="/dashboard/profile/{{posts.rePostUser}}"><i>Reposted from: </i>{{posts.rePostUser}}</strong>
           </div>
           <span><i class="mr-2 fas fa-user"></i></span>
           <strong *ngIf="(loggedUser == currentUser.userName) && userSearched == currentUser.userName">{{currentUser.userName}}</strong>
