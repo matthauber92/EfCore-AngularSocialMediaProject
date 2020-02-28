@@ -19,6 +19,8 @@ export class DashboardComponent implements OnInit {
   activeCategory: string;
   notUser: string;
 
+  enter: boolean;
+
   users: AppUser[];
 
   constructor(private dashboardService: DashboardService, private router: Router, private route: ActivatedRoute, private userService: UserService, private toastr: ToastrService, private spinner: NgxSpinnerModule) {
@@ -71,6 +73,18 @@ export class DashboardComponent implements OnInit {
 
   selectEvent(item) {
     this.router.navigateByUrl('/dashboard/profile/' + item.userName);
+  }
+
+  onEnter(event) {
+    this.enter = true;
+  }
+
+  onChangeSearch(val: string) {
+    if (this.enter) {
+      this.router.navigateByUrl('/dashboard/profile/' + val);
+    } else {
+      this.enter = false;
+    }
   }
 
   onFocused(e) {

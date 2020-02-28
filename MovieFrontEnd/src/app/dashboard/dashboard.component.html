@@ -1,10 +1,12 @@
-<nav class="navbar navbar-dark bg-dark form-inline">
+<nav class="navbar navbar-dark nav-gradient bg-dark form-inline">
   <a class="navbar-brand text-white">Movie App</a>
   <div class="ng-autocomplete">
     <ng-autocomplete [data]="users"
                      [searchKeyword]="keyword"
                      placeHolder="Search User.."
                      (selected)='selectEvent($event)'
+                     (keyup.enter)='onEnter()'
+                     (inputChanged)='onChangeSearch($event)'
                      (inputFocused)='onFocused($event)'
                      [itemTemplate]="itemTemplate"
                      [notFoundTemplate]="notFoundTemplate">
@@ -30,7 +32,7 @@
   <div class="col-12 px-0">
       <div id="library-nav" class="sub-nav">
         <ul class="nav nav-tabs nav-justified">
-          <li routerLink="/dashboard/feed" class="nav-item">
+          <li routerLink="/dashboard/feed" class="nav-item ml-4">
             <a class="nav-link nav-secondary" [ngClass]="{'active': activeCategory == 'Feed'}">
               <div class="nav-icon float-left">
                 <div class="nav-icon-bg d-block"><i class="fas fa-book-open"></i></div>
@@ -81,16 +83,6 @@
               </div>
             </a>
           </li>
-<!-- <li class="nav-item">
-      <a href="#" class="nav-link nav-info">
-          <div class="nav-icon float-left">
-              <div class="nav-icon-bg d-block"></div>
-          </div>
-          <div class="nav-title pl-1 text-right">
-              <span>This is a very long title</span>
-          </div>
-      </a>
-  </li> -->
         </ul>
       </div>
   </div>
