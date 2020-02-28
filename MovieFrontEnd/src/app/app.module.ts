@@ -16,6 +16,7 @@ import { AuthInterceptor } from './shared/auth/auth.interceptor';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ProfileComponent } from './profile/profile.component';
 import { FeedComponent } from './feed/feed.component';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { FeedComponent } from './feed/feed.component';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    AutocompleteLibModule,
     ToastrModule.forRoot({
       progressBar: true
     }),

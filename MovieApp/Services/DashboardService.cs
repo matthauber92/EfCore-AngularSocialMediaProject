@@ -32,12 +32,12 @@ namespace MovieApp.Services
         }
 
         //Return List of Recent Posts for Feed
-        public Result<List<Posts>> ListAllUserPosts()
+        public Result<List<Posts>> ListAllUserPosts(int postLimit)
         {
             Result<List<Posts>> result = new Result<List<Posts>>();
             try
             {
-                result.Value = _db.Posts.Include(u => u.User).Include(c => c.Comments).OrderByDescending(o => o.PostId).ToList();
+                result.Value = _db.Posts.Include(u => u.User).Include(c => c.Comments).OrderByDescending(o => o.PostId).Take(postLimit).ToList();
             }
             catch (Exception ex)
             {
@@ -155,6 +155,21 @@ namespace MovieApp.Services
             try
             {
                 result.Value = _db.Users.Where(u => u.UserName == userName || u.DisplayName == userName || u.UserName.StartsWith(userName) || u.UserName.EndsWith(userName)).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                result.Exception = ex;
+            }
+            return result;
+        }
+
+        //Grab All Users
+        public Result<List<ApplicationUser>> GrabUsers()
+        {
+            Result<List<ApplicationUser>> result = new Result<List<ApplicationUser>>();
+            try
+            {
+                result.Value = _db.Users.OrderBy(o => o.Id).ToList();
             }
             catch (Exception ex)
             {

@@ -29,7 +29,11 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-     this.getUser();
+    if (this.loggedUser == this.currentUser.userName || this.userSearched == this.currentUser.userName) {
+      this.getUser();
+    } else {
+      this.getPosts();
+    }
   }
 
   getUser() {
@@ -81,7 +85,6 @@ export class ProfileComponent implements OnInit {
   updateBio() {
     const me = this;
     this.dashboardService.updateBio(this.currentUser).subscribe(data => {
-      console.log(data);
       me.toastr.success("Bio Successfully Updated");
       me.bioCollapse.nativeElement.click();
     },
@@ -112,6 +115,7 @@ export class ProfileComponent implements OnInit {
       return;
 
     this.dashboardService.submitPost(this.newPost, this.currentUser.id).subscribe(data => {
+      me.toastr.success("Added New Post!");
       me.newPost.content = "";
       me.getPosts();
     },

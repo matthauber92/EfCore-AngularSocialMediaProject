@@ -15,10 +15,12 @@ export class FeedComponent implements OnInit {
   feed: Posts[];
   newComment: Comments = {};
   loggedUser: string;
+  postLimit: number;
 
   constructor(private dashboardService: DashboardService, private userService: UserService, private toastr: ToastrService) { }
 
   ngOnInit() {
+    this.postLimit = 10;
     this.getUser();
     this.getFeed();
   }
@@ -33,7 +35,7 @@ export class FeedComponent implements OnInit {
 
   getFeed() {
     const me = this;
-    this.dashboardService.listAllPosts().subscribe(data => {
+    this.dashboardService.listAllPosts(this.postLimit).subscribe(data => {
       me.feed = data;
     },
       err => {
@@ -92,5 +94,10 @@ export class FeedComponent implements OnInit {
         console.log(err);
       },
     );
+  }
+
+  morePosts() {
+    this.postLimit += this.postLimit;
+    this.getFeed();
   }
 }

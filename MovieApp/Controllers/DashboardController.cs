@@ -29,15 +29,15 @@ namespace MovieApp.Controllers
             }
             else
             {
-                return ErrorResult(result.Exception.Message);
+                return null;
             }
         }
 
         [HttpGet]
         [Route("ListAllPosts")]
-        public ActionResult<List<Posts>> ListAllPosts()
+        public ActionResult<List<Posts>> ListAllPosts(int postLimit)
         {
-            var result = _service.ListAllUserPosts();
+            var result = _service.ListAllUserPosts(postLimit);
 
             if (result.HasValue)
             {
@@ -112,6 +112,22 @@ namespace MovieApp.Controllers
         public ActionResult<ApplicationUser> Search([FromQuery] string userName)
         {
             var result = _service.Search(userName);
+
+            if (result.HasValue)
+            {
+                return result.Value;
+            }
+            else
+            {
+                return ErrorResult(result.Exception.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GrabUsers")]
+        public ActionResult<List<ApplicationUser>> GrabUsers()
+        {
+            var result = _service.GrabUsers();
 
             if (result.HasValue)
             {

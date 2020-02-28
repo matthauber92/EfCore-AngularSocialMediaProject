@@ -16,8 +16,8 @@ export class DashboardService {
     return this.http.get<Posts[]>(this.apiUrl + '/Dashboard/GetPosts?userId=' + userId);
   }
 
-  listAllPosts(): Observable<Posts[]> {
-    return this.http.get<Posts[]>(this.apiUrl + '/Dashboard/ListAllPosts');
+  listAllPosts(postLimit: number): Observable<Posts[]> {
+    return this.http.get<Posts[]>(this.apiUrl + '/Dashboard/ListAllPosts?postLimit=' + postLimit);
   }
 
   submitPost(post: Posts, userId: number): Observable<Posts> {
@@ -37,6 +37,10 @@ export class DashboardService {
     return this.http.get<AppUser>(this.apiUrl + '/Dashboard/UserSearch?userName=' + userName);
   }
 
+  grabAllUsers(): Observable<AppUser[]> {
+    return this.http.get<AppUser[]>(this.apiUrl + '/Dashboard/GrabUsers');
+  }
+
   submitComment(comment: Comments, postId: number, userName: string): Observable<Comments> {
     const data = comment;
     return this.http.post<Comments>(this.apiUrl + '/Dashboard/SubmitComment?postId=' + postId + '&userName=' + userName, data);
@@ -47,7 +51,6 @@ export class DashboardService {
   }
 
   rePost(postId: number, userId: number, rePostUser: string): Observable<Posts> {
-    console.log(rePostUser)
     return this.http.post<Posts>(this.apiUrl + '/Dashboard/RePost?postId=' + postId + '&userId=' + userId + '&rePostUser=' + rePostUser, postId);
   }
 }

@@ -10,8 +10,9 @@ namespace MovieApp.Services
     public interface IDashboardService
     {
         Result<ApplicationUser> Search(string userName);
+        Result<List<ApplicationUser>> GrabUsers();
         Result<List<Posts>> ListUserPosts(int userId);
-        Result<List<Posts>> ListAllUserPosts();
+        Result<List<Posts>> ListAllUserPosts(int postLimit);
         Result<ApplicationUser> UpdateBio(ApplicationUser userBio);
         Result<Posts> SubmitUserPost(Posts post, int userId);
         Result<Posts> RePost(int postId, int userId, string rePostUser);

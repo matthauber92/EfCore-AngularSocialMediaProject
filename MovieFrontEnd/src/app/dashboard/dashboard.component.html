@@ -1,12 +1,30 @@
 <nav class="navbar navbar-dark bg-dark form-inline">
   <a class="navbar-brand text-white">Movie App</a>
-  <div class="input-group">
-    <input class="form-control input-lg search-bar" type="text" name="user" [(ngModel)]="searchedUser"/>
+  <div class="ng-autocomplete">
+    <ng-autocomplete [data]="users"
+                     [searchKeyword]="keyword"
+                     placeHolder="Search User.."
+                     (selected)='selectEvent($event)'
+                     (inputFocused)='onFocused($event)'
+                     [itemTemplate]="itemTemplate"
+                     [notFoundTemplate]="notFoundTemplate">
+    </ng-autocomplete>
+
+    <ng-template #itemTemplate let-item>
+      <a [innerHTML]="item.userName"></a>
+    </ng-template>
+
+    <ng-template #notFoundTemplate let-notFound>
+      <div [innerHTML]="notFound"></div>
+    </ng-template>
+  </div>
+  <!--<div class="input-group">
+    <input class="form-control input-lg search-bar" type="text" name="user" [(ngModel)]="searchedUser" />
     <div class="input-group-append">
       <button (click)="userSearch()" class="input-group-text"><i class="fas fa-search"></i></button>
     </div>
-    </div>
-    <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
+  </div>-->
+  <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()">Logout</button>
 </nav>
 <div class="row">
   <div class="col-12 px-0">

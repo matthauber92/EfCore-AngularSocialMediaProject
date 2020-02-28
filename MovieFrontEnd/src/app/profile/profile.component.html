@@ -2,8 +2,13 @@
   <div class="row">
     <div class="col-3">
       <img class="rounded" style="width: 100%; height: 200px;" src="https://s.abcnews.com/images/Lifestyle/puppy-ht-3-er-170907_16x9_992.jpg" />
-      <div *ngIf="(loggedUser == currentUser.userName) && userSearched == currentUser.userName" class="col-6 justify-content-center">
-        <i #collapseBio class="far fa-edit justify-content-center" style="color: white; cursor: pointer;" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapseExample"></i>
+      <div class="row text-center">
+        <div *ngIf="(loggedUser == currentUser.userName) && userSearched == currentUser.userName" class="col-6">
+          <button #collapseBio type="button" class="btn btn-outline-warning mb-2 mt-3" style="color: white; cursor: pointer;" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapseExample"><i class="far fa-edit justify-content-center"></i></button>
+        </div>
+        <div class="col-6">
+          <button *ngIf="(loggedUser !== currentUser.userName) || userSearched !== currentUser.userName" class="btn btn-outline-warning mb-2 mt-3">Follow</button>
+        </div>
       </div>
       <div class="collapse" id="collapse">
         <div class="card card-body">
@@ -40,40 +45,47 @@
           </form>
         </div>
       </div>
-      <div *ngFor="let posts of userPosts" class="card card-shadow-sm mb-2">
-        <div class="card-body">
-          <div *ngIf="(loggedUser == currentUser.userName) && userSearched == currentUser.userName" class="float-right">
-            <span (click)="deletePost(posts.postId)"><i class="fas fa-times-circle"></i></span>
-          </div>
-          <div *ngIf="(posts.rePostUser !== null)" class="breadcrumb mr-5">
-            <strong  style="cursor: pointer;" routerLink="/dashboard/profile/{{posts.rePostUser}}"><i>Reposted from: </i>{{posts.rePostUser}}</strong>
-          </div>
-          <span><i class="mr-2 fas fa-user"></i></span>
-          <strong *ngIf="(loggedUser == currentUser.userName) && userSearched == currentUser.userName">{{currentUser.userName}}</strong>
-          <strong *ngIf="userSearched !== loggedUser">{{userProfile.userName}}</strong>
-          <span class="ml-2" (click)="rePost(posts.postId, currentUser.id, userProfile.userName)" style="cursor: pointer;" *ngIf="userSearched !== loggedUser"><i class="fas fa-retweet"></i></span>
-          <div class="mb-3">
-            {{posts.content}}
-          </div>
-          <div class="nav navbar">
-            <h5><span style="cursor: pointer;" class="badge badge-light"><i class="far fa-comment mr-2"></i>{{posts.comments.length}}</span></h5>
-            <h5 (click)="likePost(posts.postId)"><span style="cursor: pointer;" class="badge badge-light"><i class="far fa-thumbs-up mr-2"></i>{{posts.likes}}</span></h5>
-          </div>
-          <div class="card-footer text-muted">
-            <span style="width: 100%; float:left;"> Comments </span>
-            <ul *ngFor="let comments of posts.comments" style="list-style:none; float:left; width: 100%; color:gray;">
-              <li style="padding:10px;">
-                <div>{{comments.userName}}</div>
-                <span>{{comments.content}}</span>
-              </li>
-            </ul>
-            <div class="input-group mb-3">
-              <input [(ngModel)]="newComment.content" class="form-control input-lg" type="text" name="comment" />
-              <div class="input-group-append">
-                <button (click)="onSubmitComment(posts.postId)" class="input-group-text"><i class="far fa-comment-dots"></i></button>
+      <div *ngIf="userPosts">
+        <div *ngFor="let posts of userPosts" class="card card-shadow-sm mb-2">
+          <div class="card-body">
+            <div *ngIf="(loggedUser == currentUser.userName) && userSearched == currentUser.userName" class="float-right">
+              <span (click)="deletePost(posts.postId)"><i class="fas fa-times-circle"></i></span>
+            </div>
+            <div *ngIf="(posts.rePostUser !== null)" class="breadcrumb mr-5">
+              <strong style="cursor: pointer;" routerLink="/dashboard/profile/{{posts.rePostUser}}"><i>Reposted from: </i>{{posts.rePostUser}}</strong>
+            </div>
+            <span><i class="mr-2 fas fa-user"></i></span>
+            <strong *ngIf="(loggedUser == currentUser.userName) && userSearched == currentUser.userName">{{currentUser.userName}}</strong>
+            <strong *ngIf="userSearched !== loggedUser">{{userProfile.userName}}</strong>
+            <span class="ml-2" (click)="rePost(posts.postId, currentUser.id, userProfile.userName)" style="cursor: pointer;" *ngIf="userSearched !== loggedUser"><i class="fas fa-retweet"></i></span>
+            <div class="mb-3">
+              {{posts.content}}
+            </div>
+            <div class="nav navbar">
+              <h5><span style="cursor: pointer;" class="badge badge-light"><i class="far fa-comment mr-2"></i>{{posts.comments.length}}</span></h5>
+              <h5 (click)="likePost(posts.postId)"><span style="cursor: pointer;" class="badge badge-light"><i class="far fa-thumbs-up mr-2"></i>{{posts.likes}}</span></h5>
+            </div>
+            <div class="card-footer text-muted">
+              <span style="width: 100%; float:left;"> Comments </span>
+              <ul *ngFor="let comments of posts.comments" style="list-style:none; float:left; width: 100%; color:gray;">
+                <li style="padding:10px;">
+                  <div>{{comments.userName}}</div>
+                  <span>{{comments.content}}</span>
+                </li>
+              </ul>
+              <div class="input-group mb-3">
+                <input [(ngModel)]="newComment.content" class="form-control input-lg" type="text" name="comment" />
+                <div class="input-group-append">
+                  <button (click)="onSubmitComment(posts.postId)" class="input-group-text"><i class="far fa-comment-dots"></i></button>
+                </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div *ngIf="!userPosts">
+        <div class="card">
+          <h5 class="card-header text-center">No User Posts</h5>
         </div>
       </div>
     </div>
