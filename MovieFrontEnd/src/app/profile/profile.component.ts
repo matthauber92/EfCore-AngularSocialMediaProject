@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
   newPost: Posts = {};
   newComment: Comments = {};
   @ViewChild('collapseBio', { static: false }) bioCollapse: ElementRef;
+  @ViewChild('collapseComments', { static: false }) commentCollapse: ElementRef;
   loggedUser: string;
   userSearched: string;
   userProfile: AppUser = {};
@@ -133,6 +134,10 @@ export class ProfileComponent implements OnInit {
     this.dashboardService.submitComment(this.newComment, postId, this.loggedUser).subscribe(data => {
       me.newComment.content = "";
       me.getPosts();
+
+      let commentPost = me.userPosts.find(p => p.postId == postId);
+      //commentPost.showMe = true;
+      console.log(commentPost)
     },
       err => {
         console.log(err);

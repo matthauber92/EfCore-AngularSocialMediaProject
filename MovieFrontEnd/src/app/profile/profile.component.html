@@ -10,7 +10,7 @@
           <button *ngIf="(loggedUser !== currentUser.userName) || userSearched !== currentUser.userName" class="btn btn-outline-warning mb-2 mt-3"><i class="far fa-user"></i><span class="ml-2 font-weight-bold" style="color: white;">Follow</span></button>
         </div>
       </div>
-      <div class="collapse" id="collapse">
+      <div *ngIf="(loggedUser == currentUser.userName) && userSearched == currentUser.userName" class="collapse" id="collapse">
         <div class="card card-body">
           <button type="button" class="btn btn-outline-info mb-2">Change Profile Picture</button>
           <textarea class="form-control rounded" rows="3" [(ngModel)]="currentUser.bio"></textarea>
@@ -62,17 +62,19 @@
               {{posts.content}}
             </div>
             <div class="nav navbar">
-              <h5><span style="cursor: pointer;" class="badge badge-light"><i class="far fa-comment mr-2"></i>{{posts.comments.length}}</span></h5>
+              <h5 (click)="posts.showMe = !posts.showMe"><span style="cursor: pointer;" class="badge badge-light"><i class="far fa-comment mr-2"></i>{{posts.comments.length}}</span></h5>
               <h5 (click)="likePost(posts.postId)"><span style="cursor: pointer;" class="badge badge-light"><i class="far fa-thumbs-up mr-2"></i>{{posts.likes}}</span></h5>
             </div>
             <div class="card-footer text-muted">
-              <span style="width: 100%; float:left;"> Comments </span>
-              <ul *ngFor="let comments of posts.comments" style="list-style:none; float:left; width: 100%; color:gray;">
-                <li style="padding:10px;">
-                  <div>{{comments.userName}}</div>
-                  <span>{{comments.content}}</span>
-                </li>
-              </ul>
+              <span *ngIf="posts.comments.length > 0 && posts.showMe" style="width: 100%; float:left;"> Comments </span>
+              <div *ngIf="posts.comments.length > 0 && posts.showMe">
+                <ul *ngFor="let comments of posts.comments" style="list-style:none; float:left; width: 100%; color:gray;">
+                  <li style="padding:10px;">
+                    <div routerLink="/dashboard/profile/{{comments.userName}}" style="cursor: pointer;">{{comments.userName}}</div>
+                    <span>{{comments.content}}</span>
+                  </li>
+                </ul>
+              </div>
               <div class="input-group mb-3">
                 <input [(ngModel)]="newComment.content" class="form-control input-lg" type="text" name="comment" />
                 <div class="input-group-append">

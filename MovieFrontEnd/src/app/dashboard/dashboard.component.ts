@@ -23,19 +23,15 @@ export class DashboardComponent implements OnInit {
 
   users: AppUser[];
 
-  constructor(private dashboardService: DashboardService, private router: Router, private route: ActivatedRoute, private userService: UserService, private toastr: ToastrService, private spinner: NgxSpinnerModule) {
+  constructor(private dashboardService: DashboardService, private router: Router, private route: ActivatedRoute, private userService: UserService, private toastr: ToastrService) {
     this.route.url.subscribe(() => {
       const category = route.snapshot.firstChild.data.breadcrumb;
       this.selectCategory(category);
     });
-
-    const me = this;
-    this.route.params.subscribe(params => {
-      me.notUser = params.id;
-    });
   }
 
   ngOnInit() {
+    this.enter = false;
     this.getUser();
   }
 
@@ -76,14 +72,16 @@ export class DashboardComponent implements OnInit {
   }
 
   onEnter(event) {
-    this.enter = true;
+    if (event) {
+      this.enter = true;
+    }
   }
 
   onChangeSearch(val: string) {
     if (this.enter) {
       this.router.navigateByUrl('/dashboard/profile/' + val);
-    } else {
       this.enter = false;
+      return;
     }
   }
 

@@ -5,7 +5,7 @@
                      [searchKeyword]="keyword"
                      placeHolder="Search User.."
                      (selected)='selectEvent($event)'
-                     (keyup.enter)='onEnter()'
+                     (keyup.enter)='onEnter($event)'
                      (inputChanged)='onChangeSearch($event)'
                      (inputFocused)='onFocused($event)'
                      [itemTemplate]="itemTemplate"
@@ -32,7 +32,7 @@
   <div class="col-12 px-0">
       <div id="library-nav" class="sub-nav">
         <ul class="nav nav-tabs nav-justified">
-          <li routerLink="/dashboard/feed" class="nav-item ml-4">
+          <li routerLink="/dashboard/feed" class="nav-item pl-3">
             <a class="nav-link nav-secondary" [ngClass]="{'active': activeCategory == 'Feed'}">
               <div class="nav-icon float-left">
                 <div class="nav-icon-bg d-block"><i class="fas fa-book-open"></i></div>

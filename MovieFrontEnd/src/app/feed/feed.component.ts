@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { DashboardService } from '../services/dashboard.service';
 import { Posts, Comments, AppUser } from 'src/models';
 import { UserService } from '../services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-feed',
@@ -17,13 +18,22 @@ export class FeedComponent implements OnInit {
   loggedUser: string;
   postLimit: number;
 
-  constructor(private dashboardService: DashboardService, private userService: UserService, private toastr: ToastrService) { }
+  constructor(private dashboardService: DashboardService, private userService: UserService, private toastr: ToastrService ) { }
 
   ngOnInit() {
     this.postLimit = 10;
     this.getUser();
     this.getFeed();
   }
+
+  // Load more posts when bottom of page
+  @HostListener("window:scroll", [])
+  onScroll(): void {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      this.showMorePosts();
+    }
+  }
+
 
   getUser() {
     const me = this;
@@ -96,7 +106,7 @@ export class FeedComponent implements OnInit {
     );
   }
 
-  morePosts() {
+  showMorePosts() {
     this.postLimit += this.postLimit;
     this.getFeed();
   }

@@ -14,6 +14,7 @@ export class Posts {
   likes?: number;
   rePostUser?: string;
   //User: AppUser;
+  showMe?: false;
   comments?: Comments[];
 }
 
