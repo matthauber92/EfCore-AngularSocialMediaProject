@@ -134,10 +134,6 @@ export class ProfileComponent implements OnInit {
     this.dashboardService.submitComment(this.newComment, postId, this.loggedUser).subscribe(data => {
       me.newComment.content = "";
       me.getPosts();
-
-      let commentPost = me.userPosts.find(p => p.postId == postId);
-      //commentPost.showMe = true;
-      console.log(commentPost)
     },
       err => {
         console.log(err);
