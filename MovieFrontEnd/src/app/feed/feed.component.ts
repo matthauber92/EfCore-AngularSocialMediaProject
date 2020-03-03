@@ -21,7 +21,7 @@ export class FeedComponent implements OnInit {
   constructor(private dashboardService: DashboardService, private userService: UserService, private toastr: ToastrService ) { }
 
   ngOnInit() {
-    this.postLimit = 10;
+    this.postLimit = 5;
     this.getUser();
     this.getFeed();
   }
@@ -29,6 +29,7 @@ export class FeedComponent implements OnInit {
   // Load more posts when bottom of page
   @HostListener("window:scroll", [])
   onScroll(): void {
+    //TODO - this needs to work better (called way to many times during scroll)
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
       this.showMorePosts();
     }
@@ -107,7 +108,7 @@ export class FeedComponent implements OnInit {
   }
 
   showMorePosts() {
-    this.postLimit += this.postLimit;
+    this.postLimit += 5;
     this.getFeed();
   }
 }
