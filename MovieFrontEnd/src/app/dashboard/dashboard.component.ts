@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { AppUser } from 'src/models';
+import { AppUser, Notifications, Friends } from 'src/models';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 @Component({
@@ -17,7 +17,10 @@ export class DashboardComponent implements OnInit {
   keyword = 'userName';
   currentUser: AppUser = {};
   activeCategory: string;
-  notUser: string;
+  notifications: Notifications[];
+  friends: Friends[];
+  friendRequests: number;
+  messages: number;
 
   enter: boolean;
 
@@ -39,6 +42,31 @@ export class DashboardComponent implements OnInit {
     const me = this;
     this.userService.currentUser.subscribe(result => {
       me.currentUser = result;
+      me.getNotifications();
+      me.getFriendRequests();
+    },
+      err => {
+        console.log(err);
+      },
+    );
+  }
+
+  getNotifications() {
+    const me = this;
+    this.dashboardService.getNotifications(this.currentUser.id).subscribe(result => {
+      me.notifications = result;
+      console.log(me.notifications)
+    },
+      err => {
+        console.log(err);
+      },
+    );
+  }
+
+  getFriendRequests() {
+    const me = this;
+    this.dashboardService.getFriendRequests(this.currentUser.id).subscribe(result => {
+      me.friends = result;
     },
       err => {
         console.log(err);

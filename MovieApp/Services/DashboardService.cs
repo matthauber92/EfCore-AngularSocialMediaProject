@@ -31,6 +31,21 @@ namespace MovieApp.Services
             return result;
         }
 
+        //Get User Notifications
+        public Result<Notifications> GetNotifications(int userId)
+        {
+            Result<Notifications> result = new Result<Notifications>();
+            try
+            {
+                result.Value = _db.Notifications.Where(n => n.UserId == userId).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                result.Exception = ex;
+            }
+            return result;
+        }
+
         //Return List of Recent Posts for Feed
         public Result<List<Posts>> ListAllUserPosts(int postLimit)
         {
@@ -38,6 +53,75 @@ namespace MovieApp.Services
             try
             {
                 result.Value = _db.Posts.Include(u => u.User).Include(c => c.Comments).OrderByDescending(o => o.PostId).Take(postLimit).ToList();
+            }
+            catch (Exception ex)
+            {
+                result.Exception = ex;
+            }
+            return result;
+        }
+
+        //Send Friend Request
+        public Result<Friends> SendFriendRequest(int userId, int friendId)
+        {
+            Result<Friends> result = new Result<Friends>();
+            try
+            {
+                Friends model = new Friends();
+                Notifications newNotification = new Notifications();
+                using (var transaction = _db.Database.BeginTransaction())
+                {
+                    model.UserId = userId;
+                    model.FriendSentId = friendId;
+                    model.IsFriend = false;
+
+                    // update notifications of users currentUser sent rquest to
+                    var notifications = _db.Notifications.Where(u => u.UserId == friendId).FirstOrDefault();
+
+                    if(notifications == null || notifications.FriendRequests == 0)
+                    {
+                        newNotification.UserId = friendId;
+                        newNotification.FriendRequests++;
+                        _db.Notifications.Add(newNotification);
+                    }
+                    else
+                    {
+                        notifications.FriendRequests += 1;
+                    }
+
+                    _db.Friends.Add(model);
+
+                    _db.SaveChanges();
+
+                    transaction.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Exception = ex;
+            }
+            return result;
+        }
+
+        //Send Friend Request
+        public Result<List<Friends>> GetFriendRequests(int userId)
+        {
+            Result<List<Friends>> result = new Result<List<Friends>>();
+            try
+            {
+                result.Value = _db.Friends.Where(u => u.FriendSentId == userId && u.IsFriend == false).Include(u => u.User).ToList();
+
+                //if(result.HasValue)
+                //{
+                //    using (var transaction = _db.Database.BeginTransaction())
+                //    {
+                //        var resetNotifications = _db.Notifications.Where(u => u.UserId == userId);
+                //        resetNotifications
+                //        _db.SaveChanges();
+
+                //        transaction.Commit();
+                //    }
+                //}
             }
             catch (Exception ex)
             {

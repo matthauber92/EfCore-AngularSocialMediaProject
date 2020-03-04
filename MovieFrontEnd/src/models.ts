@@ -26,3 +26,18 @@ export class Comments {
   userName?: string;
   posts?: Posts;
 }
+
+export class Friends {
+  friendId?: number;
+  isFriend?: boolean;
+  user?: AppUser;
+  showRequests?: boolean;
+}
+
+export class Notifications {
+  notificationId?: number;
+  messages?: number;
+  friendRequests?: number;
+  friendSentId?: number;
+  user?: AppUser;
+}

@@ -96,6 +96,18 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  sendFriendRequest() {
+    const me = this;
+    this.dashboardService.sendFriendRequest(this.currentUser.id, this.userProfile.id).subscribe(data => {
+      me.toastr.success("Friend Request Sent");
+    },
+      err => {
+        console.log(err);
+        me.toastr.error("Bio Could Not Be Updated");
+      },
+    );
+  }
+
   deletePost(postId: number) {
     const me = this;
     if (postId !== null) {

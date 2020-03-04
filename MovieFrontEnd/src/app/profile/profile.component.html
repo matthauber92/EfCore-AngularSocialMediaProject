@@ -7,7 +7,7 @@
       </div>
       <div class="row text-center">
         <div class="col-6">
-          <button *ngIf="(loggedUser !== currentUser.userName) || userSearched !== currentUser.userName" class="btn btn-outline-warning mb-2 mt-3"><i class="far fa-user"></i><span class="ml-2 font-weight-bold" style="color: white;">Follow</span></button>
+          <button *ngIf="(loggedUser !== currentUser.userName) || userSearched !== currentUser.userName" (click)="sendFriendRequest()" class="btn btn-outline-warning mb-2 mt-3"><i class="far fa-user"></i><span class="ml-2 font-weight-bold" style="color: white;">Follow</span></button>
         </div>
       </div>
       <div *ngIf="(loggedUser == currentUser.userName) && userSearched == currentUser.userName" class="collapse" id="collapse">

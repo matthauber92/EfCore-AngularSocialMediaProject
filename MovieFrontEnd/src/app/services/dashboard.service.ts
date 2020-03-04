@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs';
-import { AppUser, Posts, Comments } from '../../models';
+import { AppUser, Posts, Comments, Friends, Notifications } from '../../models';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -12,12 +12,24 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
+  getNotifications(userId: number): Observable<Notifications[]> {
+    return this.http.get<Notifications[]>(this.apiUrl + '/Dashboard/GetNotifications?userId=' + userId);
+  }
+
   getPosts(userId: number): Observable<Posts[]> {
     return this.http.get<Posts[]>(this.apiUrl + '/Dashboard/GetPosts?userId=' + userId);
   }
 
+  getFriendRequests(userId: number): Observable<Friends[]> {
+    return this.http.get<Friends[]>(this.apiUrl + '/Dashboard/GetFriendRequests?userId=' + userId);
+  }
+
   listAllPosts(postLimit: number): Observable<Posts[]> {
     return this.http.get<Posts[]>(this.apiUrl + '/Dashboard/ListAllPosts?postLimit=' + postLimit);
+  }
+
+  sendFriendRequest(userId: number, friendId: number): Observable<Friends> {
+    return this.http.post<Friends>(this.apiUrl + '/Dashboard/SendFrientRequest?friendId=' + friendId, userId);
   }
 
   submitPost(post: Posts, userId: number): Observable<Posts> {

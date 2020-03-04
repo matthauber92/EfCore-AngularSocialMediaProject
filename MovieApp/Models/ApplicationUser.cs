@@ -18,6 +18,10 @@ namespace MovieApp.Models
         public string Bio { get; set; }
         public string Picture { get; set; }
 
+
+        [NotMapped]
+        public List<Notifications> Notifications { get; set; }
+
         [NotMapped]
         public List<Posts> Posts { get; set; }
 

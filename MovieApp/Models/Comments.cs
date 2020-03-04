@@ -13,7 +13,6 @@ namespace MovieApp.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CommentId { get; set; }
-        public string Title { get; set; }
         public string Content { get; set; }
 
         //TODO - 'FK_Comments_AspNetUsers_UserId' on table 'Comments' may cause cycles or multiple cascade paths.

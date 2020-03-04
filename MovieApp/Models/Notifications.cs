@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace MovieApp.Models
 {
-    public class Friends
+    public class Notifications
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int FriendId { get; set; }
-        public bool IsFriend { get; set; }
-        public int FriendSentId { get; set; }
+        public int NotificationId { get; set; }
+        public int Messages { get; set; }
+        public int FriendRequests { get; set; }
 
         public int UserId { get; set; }
-        [NotMapped]
+        [JsonIgnore]
         public ApplicationUser User { get; set; }
     }
 }

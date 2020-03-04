@@ -11,6 +11,7 @@ namespace MovieApp.Services
     {
         Result<ApplicationUser> Search(string userName);
         Result<List<ApplicationUser>> GrabUsers();
+        Result<Notifications> GetNotifications(int userId);
         Result<List<Posts>> ListUserPosts(int userId);
         Result<List<Posts>> ListAllUserPosts(int postLimit);
         Result<ApplicationUser> UpdateBio(ApplicationUser userBio);
@@ -19,5 +20,7 @@ namespace MovieApp.Services
         Result<bool> DeletePost(int postId);
         Result<Comments> SubmitUserComment(Comments comment, int postId, string userName);
         Result<int> LikePost(int postId);
+        Result<List<Friends>> GetFriendRequests(int userId);
+        Result<Friends> SendFriendRequest(int userId, int friendId);
     }
 }

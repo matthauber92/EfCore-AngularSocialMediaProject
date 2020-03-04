@@ -20,10 +20,16 @@ namespace MovieApp.Models
         public DbSet<Posts> Posts { get; set; }
         public DbSet<Comments> Comments { get; set; }
         public DbSet<Friends> Friends { get; set; }
+        public DbSet<Notifications> Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Notifications>()
+            .HasOne(u => u.User)
+            .WithMany(n => n.Notifications)
+            .HasForeignKey(f => f.UserId);
 
             modelBuilder.Entity<Posts>()
                 .HasOne(u => u.User)

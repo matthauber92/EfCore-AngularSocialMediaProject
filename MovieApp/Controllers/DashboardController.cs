@@ -18,10 +18,58 @@ namespace MovieApp.Controllers
         }
 
         [HttpGet]
+        [Route("GetNotifications")]
+        public ActionResult<Notifications> SendFriendRequest([FromQuery] int userId)
+        {
+            var result = _service.GetNotifications(userId);
+
+            if (result.HasValue)
+            {
+                return result.Value;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        [HttpGet]
         [Route("GetPosts")]
         public ActionResult<List<Posts>> GetPosts([FromQuery] int userId)
         {
             var result = _service.ListUserPosts(userId);
+
+            if (result.HasValue)
+            {
+                return result.Value;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        [HttpPost]
+        [Route("SendFrientRequest")]
+        public ActionResult<Friends> SendFriendRequest([FromBody] int userId, int friendId)
+        {
+            var result = _service.SendFriendRequest(userId, friendId);
+
+            if (result.HasValue)
+            {
+                return result.Value;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        [HttpGet]
+        [Route("GetFriendRequests")]
+        public ActionResult<List<Friends>> GetFriendRequests(int userId)
+        {
+            var result = _service.GetFriendRequests(userId);
 
             if (result.HasValue)
             {

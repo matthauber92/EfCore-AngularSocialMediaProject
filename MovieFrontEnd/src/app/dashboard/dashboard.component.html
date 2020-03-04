@@ -1,5 +1,22 @@
 <nav class="navbar navbar-dark nav-gradient bg-dark form-inline">
-  <a class="navbar-brand text-white">Movie App</a>
+  <div class="pt-3">
+    <a class="navbar-brand text-white">Movie App</a>
+    <ul  class="navbar-brand text-white list-inline">
+      <li (click)="getFriendRequests(); showRequests = !showRequests" class="list-inline-item ml-2" style="cursor: pointer;"><span *ngIf="notifications" class="badge badge-primary" style="z-index:15;position:relative; left: 4px; top:-10px">{{notifications.friendRequests}}</span><i class="fas fa-user-friends"></i></li>
+      <li class="list-inline-item ml-2" style="cursor: pointer;"><span class="badge badge-primary" style="z-index:15;position:relative; left: 4px; top:-10px"></span><i class="far fa-envelope"></i></li>
+    </ul>
+    <div *ngIf="showRequests">
+      <ul *ngFor="let friend of friends" class="list-group">
+        <!--style="z-index:15;position:absolute; left: 151px; top:52px"-->
+        <li (click)="showRequests = !showRequests" class="list-group-item list-group-item-action">
+          <span routerLink="/dashboard/profile/{{friend.user.userName}}" style="cursor: pointer;">{{friend.user.userName}}</span>
+          <div>
+            <button type="button" class="btn btn-outline-info mt-2" style="cursor: pointer;">Accept Friend Request</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
   <div class="ng-autocomplete">
     <ng-autocomplete [data]="users"
                      [searchKeyword]="keyword"
