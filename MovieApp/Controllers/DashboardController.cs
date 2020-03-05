@@ -49,6 +49,22 @@ namespace MovieApp.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("GetFriends")]
+        public ActionResult<List<Friends>> GetFriends([FromQuery] int userId)
+        {
+            var result = _service.GetFriends(userId);
+
+            if (result.HasValue)
+            {
+                return result.Value;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         [HttpPost]
         [Route("SendFrientRequest")]
         public ActionResult<Friends> SendFriendRequest([FromBody] int userId, int friendId)
@@ -67,9 +83,25 @@ namespace MovieApp.Controllers
 
         [HttpGet]
         [Route("GetFriendRequests")]
-        public ActionResult<List<Friends>> GetFriendRequests(int userId)
+        public ActionResult<List<Friends>> GetFriendRequests(int userId, bool resetNotification)
         {
-            var result = _service.GetFriendRequests(userId);
+            var result = _service.GetFriendRequests(userId, resetNotification);
+
+            if (result.HasValue)
+            {
+                return result.Value;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        [HttpPost]
+        [Route("AcceptFriendRequest")]
+        public ActionResult<Friends> AcceptFriendRequests([FromBody] int userId, int friendId)
+        {
+            var result = _service.AcceptFriendRequests(userId, friendId);
 
             if (result.HasValue)
             {

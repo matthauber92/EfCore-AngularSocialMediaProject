@@ -20,7 +20,9 @@ namespace MovieApp.Services
         Result<bool> DeletePost(int postId);
         Result<Comments> SubmitUserComment(Comments comment, int postId, string userName);
         Result<int> LikePost(int postId);
-        Result<List<Friends>> GetFriendRequests(int userId);
+        Result<List<Friends>> GetFriends(int userId);
+        Result<List<Friends>> GetFriendRequests(int userId, bool resetNotification);
         Result<Friends> SendFriendRequest(int userId, int friendId);
+        Result<Friends> AcceptFriendRequests(int userId, int friendId);
     }
 }

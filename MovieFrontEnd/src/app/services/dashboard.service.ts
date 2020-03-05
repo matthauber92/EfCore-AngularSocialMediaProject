@@ -20,8 +20,12 @@ export class DashboardService {
     return this.http.get<Posts[]>(this.apiUrl + '/Dashboard/GetPosts?userId=' + userId);
   }
 
-  getFriendRequests(userId: number): Observable<Friends[]> {
-    return this.http.get<Friends[]>(this.apiUrl + '/Dashboard/GetFriendRequests?userId=' + userId);
+  getFriends(userId: number): Observable<Friends[]> {
+    return this.http.get<Friends[]>(this.apiUrl + '/Dashboard/GetFriends?userId=' + userId);
+  }
+
+  getFriendRequests(userId: number, resetNotification: boolean): Observable<Friends[]> {
+    return this.http.get<Friends[]>(this.apiUrl + '/Dashboard/GetFriendRequests?userId=' + userId + '&resetNotification=' + resetNotification);
   }
 
   listAllPosts(postLimit: number): Observable<Posts[]> {
@@ -30,6 +34,10 @@ export class DashboardService {
 
   sendFriendRequest(userId: number, friendId: number): Observable<Friends> {
     return this.http.post<Friends>(this.apiUrl + '/Dashboard/SendFrientRequest?friendId=' + friendId, userId);
+  }
+
+  acceptFriendRequest(userId: number, friendId: number): Observable<Friends> {
+    return this.http.post<Friends>(this.apiUrl + '/Dashboard/AcceptFriendRequest?friendId=' + friendId, userId);
   }
 
   submitPost(post: Posts, userId: number): Observable<Posts> {

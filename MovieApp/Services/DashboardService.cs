@@ -61,6 +61,21 @@ namespace MovieApp.Services
             return result;
         }
 
+        //Get Friends
+        public Result<List<Friends>> GetFriends(int userId)
+        {
+            Result<List<Friends>> result = new Result<List<Friends>>();
+            try
+            {
+                result.Value = _db.Friends.Where(u => u.FriendSentId == userId && u.IsFriend == true).Include(u => u.User).ToList();
+            }
+            catch (Exception ex)
+            {
+                result.Exception = ex;
+            }
+            return result;
+        }
+
         //Send Friend Request
         public Result<Friends> SendFriendRequest(int userId, int friendId)
         {
@@ -78,7 +93,7 @@ namespace MovieApp.Services
                     // update notifications of users currentUser sent rquest to
                     var notifications = _db.Notifications.Where(u => u.UserId == friendId).FirstOrDefault();
 
-                    if(notifications == null || notifications.FriendRequests == 0)
+                    if(notifications == null)
                     {
                         newNotification.UserId = friendId;
                         newNotification.FriendRequests++;
@@ -104,24 +119,53 @@ namespace MovieApp.Services
         }
 
         //Send Friend Request
-        public Result<List<Friends>> GetFriendRequests(int userId)
+        public Result<List<Friends>> GetFriendRequests(int userId, bool resetNotification)
         {
             Result<List<Friends>> result = new Result<List<Friends>>();
             try
             {
                 result.Value = _db.Friends.Where(u => u.FriendSentId == userId && u.IsFriend == false).Include(u => u.User).ToList();
 
-                //if(result.HasValue)
-                //{
-                //    using (var transaction = _db.Database.BeginTransaction())
-                //    {
-                //        var resetNotifications = _db.Notifications.Where(u => u.UserId == userId);
-                //        resetNotifications
-                //        _db.SaveChanges();
+                if (result.HasValue && resetNotification)
+                {
+                    using (var transaction = _db.Database.BeginTransaction())
+                    {
+                        var resetNotifications = _db.Notifications.Where(u => u.UserId == userId).FirstOrDefault();
+                        resetNotifications.FriendRequests = 0;
 
-                //        transaction.Commit();
-                //    }
-                //}
+                        _db.SaveChanges();
+
+                        transaction.Commit();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Exception = ex;
+            }
+            return result;
+        }
+
+        //Accept Friend Request
+        public Result<Friends> AcceptFriendRequests(int userId, int friendId)
+        {
+            Result<Friends> result = new Result<Friends>();
+            try
+            {
+                var newFriend = _db.Friends.Where(u => u.FriendSentId == userId && u.IsFriend == false && u.UserId == friendId).Include(u => u.User).FirstOrDefault();
+
+                if (newFriend != null)
+                {
+                    using (var transaction = _db.Database.BeginTransaction())
+                    {
+                        newFriend.IsFriend = true;
+
+                        _db.SaveChanges();
+
+                        transaction.Commit();
+                    }
+                }
+                result.Value = newFriend;
             }
             catch (Exception ex)
             {

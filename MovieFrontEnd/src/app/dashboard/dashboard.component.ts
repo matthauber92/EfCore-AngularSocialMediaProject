@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
   friends: Friends[];
   friendRequests: number;
   messages: number;
+  resetNotification: boolean;
 
   enter: boolean;
 
@@ -35,6 +36,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.enter = false;
+    this.resetNotification = false;
     this.getUser();
   }
 
@@ -55,7 +57,6 @@ export class DashboardComponent implements OnInit {
     const me = this;
     this.dashboardService.getNotifications(this.currentUser.id).subscribe(result => {
       me.notifications = result;
-      console.log(me.notifications)
     },
       err => {
         console.log(err);
@@ -65,11 +66,29 @@ export class DashboardComponent implements OnInit {
 
   getFriendRequests() {
     const me = this;
-    this.dashboardService.getFriendRequests(this.currentUser.id).subscribe(result => {
+    this.dashboardService.getFriendRequests(this.currentUser.id, this.resetNotification).subscribe(result => {
       me.friends = result;
+
+      if (me.resetNotification) {
+        me.resetNotification = false;
+        me.getNotifications();
+      }
     },
       err => {
         console.log(err);
+      },
+    );
+  }
+
+  acceptFriendRequest(friendId: number) {
+    const me = this;
+    this.dashboardService.acceptFriendRequest(this.currentUser.id, friendId).subscribe(data => {
+      me.toastr.success("Friend Request Accepted");
+      me.getFriendRequests();
+    },
+      err => {
+        console.log(err);
+        me.toastr.error("Friend Request Could Not Be Updated");
       },
     );
   }

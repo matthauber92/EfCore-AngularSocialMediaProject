@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { DashboardService } from '../services/dashboard.service';
-import { Posts, Comments, AppUser } from 'src/models';
+import { Posts, Comments, AppUser, Friends } from 'src/models';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../services/user.service';
 import { ActivatedRoute } from '@angular/router';
@@ -16,10 +16,10 @@ export class ProfileComponent implements OnInit {
   newPost: Posts = {};
   newComment: Comments = {};
   @ViewChild('collapseBio', { static: false }) bioCollapse: ElementRef;
-  @ViewChild('collapseComments', { static: false }) commentCollapse: ElementRef;
   loggedUser: string;
   userSearched: string;
   userProfile: AppUser = {};
+  friends: Friends[];
 
   constructor(private dashboardService: DashboardService, private route: ActivatedRoute, private userService: UserService, private toastr: ToastrService) {
     const me = this;
@@ -43,6 +43,7 @@ export class ProfileComponent implements OnInit {
       me.currentUser = result;
       me.loggedUser = me.currentUser.userName;
       me.getPosts();
+      me.getFriends();
     });
   }
 
@@ -52,6 +53,7 @@ export class ProfileComponent implements OnInit {
       this.dashboardService.searchUser(this.userSearched).subscribe(result => {
         me.userProfile = result;
         me.getPosts();
+        me.getFriends();
       },
         err => {
           console.log(err);
@@ -59,6 +61,7 @@ export class ProfileComponent implements OnInit {
       );
     } else {
       this.getPosts();
+      me.getFriends();
     }
   }
 
@@ -75,6 +78,27 @@ export class ProfileComponent implements OnInit {
     } else {
       this.dashboardService.getPosts(this.currentUser.id).subscribe(data => {
         me.userPosts = data;
+      },
+        err => {
+          console.log(err);
+        },
+      );
+    }
+  }
+
+  getFriends() {
+    const me = this;
+    if (this.userSearched !== this.loggedUser) {
+      this.dashboardService.getFriends(this.userProfile.id).subscribe(data => {
+        me.friends = data;
+      },
+        err => {
+          console.log(err);
+        },
+      );
+    } else {
+      this.dashboardService.getFriends(this.currentUser.id).subscribe(data => {
+        me.friends = data;
       },
         err => {
           console.log(err);

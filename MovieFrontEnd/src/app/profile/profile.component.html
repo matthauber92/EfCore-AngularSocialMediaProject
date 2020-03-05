@@ -1,6 +1,6 @@
 <div id="UserProfile" class="container">
   <div class="row">
-    <div class="col-3">
+    <div class="col-4">
       <img class="rounded" style="width: 100%; height: 200px;" src="https://s.abcnews.com/images/Lifestyle/puppy-ht-3-er-170907_16x9_992.jpg" />
       <div *ngIf="(loggedUser == currentUser.userName) && userSearched == currentUser.userName" class="col-12">
         <button #collapseBio type="button" class="btn btn-outline-warning mb-2 mt-3" style="color: white; cursor: pointer;" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapseExample"><i class="far fa-edit"></i><span class="font-weight-bold ml-2">Edit</span></button>
@@ -26,8 +26,24 @@
           </div>
         </div>
       </div>
+      <div *ngIf="friends" class="card mt-2">
+        <div class="card-title ml-2 mt-2 pb-1">
+          <i class="fas fa-users"></i>
+          <strong class="ml-2">Friends</strong>
+        </div>
+        <div class="row mb-2">
+          <div *ngFor="let friend of friends" class="col-4">
+            <div routerLink="/dashboard/profile/{{friend.user.userName}}" style="cursor:pointer;">
+              <div class="pl-2 pt-2">
+                <i class="fas fa-user"></i>
+                <span class="ml-1">{{friend.user.userName}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-9">
+    <div class="col-8">
       <div *ngIf="(loggedUser == currentUser.userName) && userSearched == currentUser.userName" class="card mb-1">
         <div class="card-header">
           <form name="form" (ngSubmit)="onSubmit(f)" #f="ngForm">
